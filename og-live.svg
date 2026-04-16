@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0f"/>
+      <stop offset="100%" style="stop-color:#0f0f1a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#9945FF"/>
+      <stop offset="100%" style="stop-color:#14F195"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#12121e"/>
+    </linearGradient>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="20" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Grid -->
+  <g opacity="0.04" stroke="#ffffff" stroke-width="1">
+    <line x1="0" y1="126" x2="1200" y2="126"/>
+    <line x1="0" y1="252" x2="1200" y2="252"/>
+    <line x1="0" y1="378" x2="1200" y2="378"/>
+    <line x1="0" y1="504" x2="1200" y2="504"/>
+    <line x1="240" y1="0" x2="240" y2="630"/>
+    <line x1="480" y1="0" x2="480" y2="630"/>
+    <line x1="720" y1="0" x2="720" y2="630"/>
+    <line x1="960" y1="0" x2="960" y2="630"/>
+  </g>
+
+  <!-- Glow orbs -->
+  <circle cx="1100" cy="100" r="200" fill="#9945FF" opacity="0.05" filter="url(#softglow)"/>
+  <circle cx="100" cy="530" r="150" fill="#14F195" opacity="0.05" filter="url(#softglow)"/>
+
+  <!-- Top accent bar -->
+  <rect x="0" y="0" width="1200" height="4" fill="url(#accent)"/>
+
+  <!-- Live indicator -->
+  <circle cx="80" cy="75" r="7" fill="#14F195" filter="url(#glow)"/>
+  <circle cx="80" cy="75" r="4" fill="#14F195"/>
+  <text x="98" y="80" font-family="'Arial', 'Helvetica', sans-serif" font-size="13" fill="#14F195" font-weight="700" letter-spacing="2">LIVE</text>
+
+  <!-- Main title -->
+  <text x="80" y="175" font-family="'Arial', 'Helvetica', sans-serif" font-size="56" font-weight="700" fill="#ffffff" letter-spacing="-1">Live Dashboard</text>
+  <text x="80" y="240" font-family="'Arial', 'Helvetica', sans-serif" font-size="26" fill="#8888aa" font-weight="400">Real-time Solana stablecoin supply, peg health &amp; DeFi TVL</text>
+
+  <!-- Gradient underline -->
+  <rect x="80" y="258" width="320" height="4" rx="2" fill="url(#accent)"/>
+
+  <!-- Metric cards row -->
+  <rect x="80" y="300" width="195" height="105" rx="10" fill="url(#card1)" stroke="#2a2a40" stroke-width="1"/>
+  <text x="104" y="330" font-family="'Arial', 'Helvetica', sans-serif" font-size="10" fill="#555577" font-weight="600" letter-spacing="1.5">SUPPLY</text>
+  <text x="104" y="365" font-family="'Arial', 'Helvetica', sans-serif" font-size="28" font-weight="700" fill="#14F195">$16B+</text>
+  <text x="104" y="386" font-family="'Arial', 'Helvetica', sans-serif" font-size="11" fill="#444466">circulating</text>
+
+  <rect x="290" y="300" width="195" height="105" rx="10" fill="url(#card1)" stroke="#2a2a40" stroke-width="1"/>
+  <text x="314" y="330" font-family="'Arial', 'Helvetica', sans-serif" font-size="10" fill="#555577" font-weight="600" letter-spacing="1.5">SOL PRICE</text>
+  <text x="314" y="365" font-family="'Arial', 'Helvetica', sans-serif" font-size="28" font-weight="700" fill="#9945FF">Live</text>
+  <text x="314" y="386" font-family="'Arial', 'Helvetica', sans-serif" font-size="11" fill="#444466">via DefiLlama</text>
+
+  <rect x="500" y="300" width="195" height="105" rx="10" fill="url(#card1)" stroke="#2a2a40" stroke-width="1"/>
+  <text x="524" y="330" font-family="'Arial', 'Helvetica', sans-serif" font-size="10" fill="#555577" font-weight="600" letter-spacing="1.5">DeFi TVL</text>
+  <text x="524" y="365" font-family="'Arial', 'Helvetica', sans-serif" font-size="28" font-weight="700" fill="#ffffff">$8B+</text>
+  <text x="524" y="386" font-family="'Arial', 'Helvetica', sans-serif" font-size="11" fill="#444466">on-chain locked</text>
+
+  <!-- Time range buttons illustration -->
+  <g>
+    <rect x="80" y="430" width="42" height="24" rx="12" fill="#14F195" stroke="none"/>
+    <text x="101" y="446" font-family="'Arial', 'Helvetica', sans-serif" font-size="11" fill="#000" text-anchor="middle" font-weight="700">3M</text>
+
+    <rect x="132" y="430" width="42" height="24" rx="12" fill="#1e1e30" stroke="#2a2a40" stroke-width="1"/>
+    <text x="153" y="446" font-family="'Arial', 'Helvetica', sans-serif" font-size="11" fill="#666688" text-anchor="middle" font-weight="600">6M</text>
+
+    <rect x="184" y="430" width="42" height="24" rx="12" fill="#1e1e30" stroke="#2a2a40" stroke-width="1"/>
+    <text x="205" y="446" font-family="'Arial', 'Helvetica', sans-serif" font-size="11" fill="#666688" text-anchor="middle" font-weight="600">1Y</text>
+
+    <rect x="236" y="430" width="42" height="24" rx="12" fill="#1e1e30" stroke="#2a2a40" stroke-width="1"/>
+    <text x="257" y="446" font-family="'Arial', 'Helvetica', sans-serif" font-size="11" fill="#666688" text-anchor="middle" font-weight="600">ALL</text>
+  </g>
+
+  <!-- Right: mini chart -->
+  <rect x="780" y="110" width="340" height="390" rx="12" fill="#0d0d18" stroke="#1e1e30" stroke-width="1"/>
+  <text x="804" y="145" font-family="'Arial', 'Helvetica', sans-serif" font-size="11" fill="#444466" font-weight="600" letter-spacing="1.5">STABLECOIN SUPPLY — 3 MONTHS</text>
+
+  <!-- Chart bars -->
+  <g opacity="0.7">
+    <rect x="804" y="340" width="18" height="80" rx="3" fill="#9945FF" opacity="0.6"/>
+    <rect x="830" y="320" width="18" height="100" rx="3" fill="#9945FF" opacity="0.65"/>
+    <rect x="856" y="300" width="18" height="120" rx="3" fill="#9945FF" opacity="0.7"/>
+    <rect x="882" y="280" width="18" height="140" rx="3" fill="#9945FF" opacity="0.75"/>
+    <rect x="908" y="265" width="18" height="155" rx="3" fill="#14F195" opacity="0.6"/>
+    <rect x="934" y="255" width="18" height="165" rx="3" fill="#14F195" opacity="0.65"/>
+    <rect x="960" y="245" width="18" height="175" rx="3" fill="#14F195" opacity="0.7"/>
+    <rect x="986" y="238" width="18" height="182" rx="3" fill="#14F195" opacity="0.75"/>
+    <rect x="1012" y="230" width="18" height="190" rx="3" fill="#14F195" opacity="0.8"/>
+    <rect x="1038" y="220" width="18" height="200" rx="3" fill="#14F195" opacity="0.9"/>
+    <rect x="1064" y="210" width="18" height="210" rx="3" fill="#14F195"/>
+    <rect x="1090" y="205" width="18" height="215" rx="3" fill="#14F195" filter="url(#glow)"/>
+  </g>
+
+  <!-- Y axis labels -->
+  <text x="1116" y="215" font-family="'Arial', 'Helvetica', sans-serif" font-size="10" fill="#444466">$16B</text>
+  <text x="1116" y="290" font-family="'Arial', 'Helvetica', sans-serif" font-size="10" fill="#444466">$14B</text>
+  <text x="1116" y="365" font-family="'Arial', 'Helvetica', sans-serif" font-size="10" fill="#444466">$12B</text>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="590" width="1200" height="40" fill="#0d0d18"/>
+  <text x="80" y="616" font-family="'Arial', 'Helvetica', sans-serif" font-size="14" fill="#444466">solanastablecoin.bingo/live</text>
+  <text x="1120" y="616" font-family="'Arial', 'Helvetica', sans-serif" font-size="14" fill="#444466" text-anchor="end">Solana Stablecoin Analytics</text>
+</svg>

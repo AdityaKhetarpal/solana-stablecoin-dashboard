@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Solana Stablecoin Report - Q1 2026</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js" integrity="sha384-e6cc9LaIG7xZ3XD5B+jtr1NhTWPQGQdRCh6xiZ+ZFUtWCpg4ycv3Sh+SkZoopvUY" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js" integrity="sha384-oNtu+d18330MVFpltUTve1DatxCkkctlpA2AC3GulbVFOSqhHdDat3qHse/Lbuek" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      /* Solana Brand Palette */
+      --sol-purple:  #9945FF;
+      --sol-green:   #14F195;
+      --sol-teal:    #03E1FF;
+      --sol-pink:    #DC1FFF;
+
+      --bg:       #10092a;          /* readable dark purple */
+      --surface:  #170f35;          /* card surface */
+      --surface2: #1e1540;          /* card hover */
+      --border:   rgba(153,69,255,0.22);
+      --accent:   #9945FF;
+      --accent2:  #14F195;
+      --accent3:  #03E1FF;
+      --accent4:  #DC1FFF;
+      --text:     #F0EBF8;
+      --muted:    #b0a3d4;
+      --red:      #f43f5e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      /* Solana aurora mesh background */
+      background-image:
+        radial-gradient(ellipse 80% 50% at 10% 0%,   rgba(153,69,255,0.09) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 90% 100%,  rgba(20,241,149,0.06) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 60% at 50% 50%,   rgba(220,31,255,0.03) 0%, transparent 70%);
+      background-attachment: fixed;
+    }
+
+    /* ── Header ── */
+    header {
+      background: linear-gradient(140deg, #120a2e 0%, #1a0f3a 35%, #0f0a28 65%, #0a1a20 100%);
+      border-bottom: 1px solid rgba(153,69,255,0.3);
+      padding: 56px 40px 44px;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 80% at 5%  50%, rgba(153,69,255,0.16) 0%, transparent 55%),
+        radial-gradient(ellipse 55% 60% at 95% 50%, rgba(20,241,149,0.10) 0%, transparent 50%),
+        radial-gradient(ellipse 40% 40% at 50% 10%, rgba(220,31,255,0.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    /* Decorative corner glow orb */
+    header::after {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(20,241,149,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(90deg, rgba(153,69,255,0.2), rgba(20,241,149,0.1));
+      border: 1px solid rgba(153,69,255,0.5);
+      color: #14F195;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 0 16px rgba(153,69,255,0.2);
+    }
+    header h1 {
+      font-size: clamp(24px, 4vw, 42px);
+      font-weight: 900;
+      background: linear-gradient(90deg, #ffffff 0%, #9945FF 30%, #14F195 65%, #03E1FF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    header p {
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 640px;
+    }
+    .sources-pill {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    .pill {
+      background: rgba(153,69,255,0.12);
+      border: 1px solid rgba(153,69,255,0.3);
+      border-radius: 20px;
+      font-size: 11px;
+      color: #B388FF;
+      padding: 4px 12px;
+      backdrop-filter: blur(4px);
+    }
+
+    /* ── KPI strip ── */
+    .kpi-strip {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 1px;
+      background: rgba(153,69,255,0.12);
+      border-bottom: 1px solid rgba(153,69,255,0.25);
+    }
+    .kpi {
+      background: linear-gradient(160deg, #180f38 0%, #120a2e 100%);
+      padding: 22px 24px;
+      position: relative;
+    }
+    .kpi::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 24px; right: 24px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(153,69,255,0.3), transparent);
+    }
+    .kpi-label { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.1em; }
+    .kpi-value { font-size: 28px; font-weight: 900; margin: 6px 0 3px; color: #EDE9FF; letter-spacing: -0.02em; }
+    .kpi-sub   { font-size: 11px; color: var(--muted); }
+    .kpi-value.green,
+    .kpi-value.purple,
+    .kpi-value.blue,
+    .kpi-value.orange,
+    .kpi-value.red { color: #EDE9FF; text-shadow: 0 0 24px rgba(153,69,255,0.25); }
+
+    /* ── Grid ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 20px;
+      padding: 28px 24px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: linear-gradient(145deg, rgba(26,15,52,0.97) 0%, rgba(18,10,40,0.98) 100%);
+      border: 1px solid rgba(153,69,255,0.25);
+      border-radius: 16px;
+      padding: 22px 24px;
+      position: relative;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(153,69,255,0.08),
+        0 4px 32px rgba(153,69,255,0.08),
+        0 1px 4px rgba(0,0,0,0.6);
+      transition: box-shadow 0.3s;
+    }
+    .card:hover {
+      box-shadow:
+        0 0 0 1px rgba(153,69,255,0.18),
+        0 4px 32px rgba(153,69,255,0.12),
+        0 1px 8px rgba(0,0,0,0.5);
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #9945FF 0%, #14F195 50%, #03E1FF 100%);
+      opacity: 0.85;
+    }
+    .col-12 { grid-column: span 12; }
+    .col-8  { grid-column: span 8;  }
+    .col-6  { grid-column: span 6;  }
+    .col-4  { grid-column: span 4;  }
+    @media (max-width: 900px) {
+      .col-8, .col-6, .col-4 { grid-column: span 12; }
+    }
+
+    .card-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 6px;
+    }
+    .card-headline {
+      font-size: 18px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 4px;
+      letter-spacing: -0.01em;
+    }
+    .card-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    canvas { max-height: 340px; }
+
+    /* ── Table ── */
+    table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 16px; }
+    th { text-align: left; color: rgba(255,255,255,0.55); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid rgba(153,69,255,0.2); padding: 10px 10px; }
+    td { padding: 10px 10px; border-bottom: 1px solid rgba(153,69,255,0.08); color: var(--text); }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(153,69,255,0.05); }
+    .tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 10px;
+      letter-spacing: 0.05em;
+    }
+    .tag-fiat    { background: rgba(20,241,149,0.12); color: var(--accent2); border: 1px solid rgba(20,241,149,0.25); }
+    .tag-yield   { background: rgba(251,146,60,0.12); color: var(--accent4); border: 1px solid rgba(251,146,60,0.25); }
+    .tag-crypto  { background: rgba(0,194,255,0.12); color: var(--accent3); border: 1px solid rgba(0,194,255,0.25); }
+    .tag-mixed   { background: rgba(153,69,255,0.12); color: #c084fc; border: 1px solid rgba(153,69,255,0.25); }
+
+    /* ── Insight box ── */
+    .insight {
+      background: linear-gradient(135deg, rgba(153,69,255,0.08) 0%, rgba(20,241,149,0.04) 100%);
+      border: 1px solid rgba(153,69,255,0.25);
+      border-left: 3px solid #9945FF;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .insight strong { color: #14F195; }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 32px;
+      color: var(--muted);
+      font-size: 12px;
+      border-top: 1px solid rgba(153,69,255,0.25);
+      margin-top: 20px;
+      background: linear-gradient(180deg, transparent 0%, rgba(153,69,255,0.05) 100%);
+    }
+    footer a { color: #14F195; text-decoration: none; }
+    footer a:hover { color: #9945FF; }
+
+    /* ── Protocol Bar Chart ── */
+    .proto-chart { display: flex; flex-direction: column; gap: 14px; margin-top: 8px; padding: 4px 0; }
+    .proto-bar   { display: grid; grid-template-columns: 110px 1fr 56px; align-items: center; gap: 10px; }
+    .proto-label { display: flex; align-items: center; gap: 8px; min-width: 0; }
+    .proto-label img { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; background: #2a3045; flex-shrink: 0; }
+    .proto-label span { font-size: 13px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .proto-track { background: rgba(153,69,255,0.1); border-radius: 6px; height: 28px; overflow: hidden; border: 1px solid rgba(153,69,255,0.15); }
+    .proto-fill  { height: 100%; width: var(--pct); background: linear-gradient(90deg, var(--clr), color-mix(in srgb, var(--clr) 60%, #14F195)); border-radius: 6px; opacity: 0.85;
+                   transition: width 1s cubic-bezier(.4,0,.2,1); }
+    .proto-val   { font-size: 12px; font-weight: 700; color: var(--muted); text-align: right; }
+
+    /* ── Footer author ── */
+    .footer-author {
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; margin-top: 14px; flex-wrap: wrap;
+      font-size: 13px; color: var(--muted);
+    }
+    .footer-author strong { color: var(--text); font-weight: 700; }
+    .footer-divider { color: var(--border); }
+    .x-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      color: #fff; font-weight: 600; text-decoration: none;
+      background: #0a0020; border: 1px solid rgba(153,69,255,0.5);
+      padding: 4px 10px; border-radius: 20px;
+      transition: background 0.2s, border-color 0.2s;
+      font-size: 12px;
+    }
+    .x-link:hover { background: rgba(153,69,255,0.15); border-color: rgba(153,69,255,0.7); }
+
+    /* ── Chart source watermark ── */
+    .chart-source {
+      text-align: right;
+      font-size: 10px;
+      color: rgba(176,163,212,0.55);
+      margin-top: 8px;
+      font-style: italic;
+      letter-spacing: 0.03em;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="header-badge">Research Report</div>
+  <h1>Solana Stablecoin Report - Q1 2026</h1>
+  <p>An on-chain analysis of stablecoin supply, transaction volume, DeFi TVL, and market composition on the Solana network from January 1 to March 31, 2026.</p>
+</header>
+
+<!-- ── KPI STRIP ── -->
+<div class="kpi-strip">
+  <div class="kpi">
+    <div class="kpi-label">Supply ATH (Feb)</div>
+    <div class="kpi-value green">$16.8B</div>
+    <div class="kpi-sub">3× growth since end-2024</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">Q1 Txn Volume Peak</div>
+    <div class="kpi-value purple">$650B</div>
+    <div class="kpi-sub">Feb - all-chain monthly record</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">Global Txn Share</div>
+    <div class="kpi-value blue">36%</div>
+    <div class="kpi-sub">of global stablecoin volume</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">USDC Solana Supply</div>
+    <div class="kpi-value green">$8.9B</div>
+    <div class="kpi-sub">53% of Solana stablecoins</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">Solana DeFi TVL</div>
+    <div class="kpi-value purple">$7B</div>
+    <div class="kpi-sub">80M SOL (native ATH)</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">SOL Price Range</div>
+    <div class="kpi-value red">$76-$145</div>
+    <div class="kpi-sub">−41% from Jan peak to Mar avg</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">Alt Stablecoin Share</div>
+    <div class="kpi-value orange">23.7%</div>
+    <div class="kpi-sub">vs 4.4% a year ago</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi-label">Peak Stablecoin DAU</div>
+    <div class="kpi-value blue">4.4M</div>
+    <div class="kpi-sub">Daily active users, Jan 2026</div>
+  </div>
+</div>
+
+<!-- ── MAIN GRID ── -->
+<div class="grid">
+
+  <!-- Chart 1: Stablecoin Supply (full width) -->
+  <div class="card col-6">
+    <div class="card-title">Stablecoin Supply on Solana</div>
+    <div class="card-headline">Total Supply hit $16.8B ATH in February 2026</div>
+    <div class="card-sub">Daily interpolated values • Sources: Artemis, DefiLlama, Chainstack</div>
+    <canvas id="supplyChart"></canvas>
+    <div class="chart-source">Source: Artemis · DefiLlama · Chainstack</div>
+    <div class="insight">
+      <strong>Key insight:</strong> Supply grew from ~$14B on Jan 1 to an ATH of $16.8B in mid-February - a 20% intra-quarter surge - before settling at $15.7B by end of March. The 3× growth vs. end-2024 reflects Circle's $1.25B USDC mint in January and a $2.5B weekly mint in mid-March.
+    </div>
+  </div>
+
+  <!-- Chart 2: Composition Donut -->
+  <div class="card col-6">
+    <div class="card-title">Stablecoin Composition</div>
+    <div class="card-headline">USDC dominates at 53%</div>
+    <div class="card-sub">Share of Solana supply at Feb 2026 ATH • Source: Artemis</div>
+    <canvas id="compositionChart"></canvas>
+    <div class="chart-source">Source: Artemis</div>
+    <div class="insight">
+      <strong>Key insight:</strong> USDC commands an outright majority at 53%, underscoring Circle's deep integration with Solana DeFi and payment rails. Yield-bearing alternatives — USDe/sUSDe (8%) and USDY (4%) — have collectively reached ~12%, a structural shift driven by Kamino vaults and RWA lending demand. USDT's 22% share reflects CEX on-ramp dominance rather than DeFi utility.
+    </div>
+  </div>
+
+  <!-- Chart 3: Monthly Txn Volume -->
+  <div class="card col-6">
+    <div class="card-title">Monthly Stablecoin Transaction Volume</div>
+    <div class="card-headline">$650B in February - single-chain monthly record</div>
+    <div class="card-sub">Billions USD • Sources: MEXC Research, Solana Foundation, Cryip</div>
+    <canvas id="volumeChart"></canvas>
+    <div class="chart-source">Source: MEXC Research · Solana Foundation · Cryip</div>
+    <div class="insight">
+      <strong>Key insight:</strong> February's $650B volume was <strong>2× the previous record</strong> (Oct 2025) and the highest ever recorded on any single blockchain in a single month. Solana's USDC transfer volume surpassed Ethereum's for the first time, a crossover that began Dec 29, 2025.
+    </div>
+  </div>
+
+  <!-- Chart 4: SOL Price vs Supply divergence -->
+  <div class="card col-6">
+    <div class="card-title">SOL Price vs. Stablecoin Supply (Divergence)</div>
+    <div class="card-headline">Supply held firm as SOL fell 41% from peak</div>
+    <div class="card-sub">Dual-axis • Price: Surf/Market Data • Supply: DefiLlama, Artemis</div>
+    <canvas id="divergenceChart"></canvas>
+    <div class="chart-source">Source: DefiLlama · Artemis · Surf Market Data</div>
+    <div class="insight">
+      <strong>Key insight:</strong> SOL-denominated TVL hit an all-time high even as USD price collapsed - signalling users <strong>added SOL to DeFi</strong> during the drawdown rather than exiting. Stablecoin supply dropped only ~7% from its ATH while SOL price dropped 41%.
+    </div>
+  </div>
+
+  <!-- Chart 5: DeFi Protocol TVL -->
+  <div class="card col-6">
+    <div class="card-title">Top Solana DeFi TVL by Protocol</div>
+    <div class="card-headline">Jupiter leads at $2.6B; Raydium $660M</div>
+    <div class="card-sub">USD TVL (approx. March 2026) • Sources: DefiLlama, Surf data</div>
+    <div id="tvlChart" class="proto-chart">
+      <div class="proto-bar" style="--pct:100%;--clr:#9945FF">
+        <div class="proto-label">
+          <img src="https://assets.coingecko.com/coins/images/34188/small/jup.png" alt="Jupiter" onerror="this.style.display='none'"/>
+          <span>Jupiter</span>
+        </div>
+        <div class="proto-track"><div class="proto-fill"></div></div>
+        <div class="proto-val">$2.63B</div>
+      </div>
+      <div class="proto-bar" style="--pct:30.4%;--clr:#03E1FF">
+        <div class="proto-label">
+          <img src="https://assets.coingecko.com/coins/images/29769/small/marginfi.png" alt="marginfi" onerror="this.style.display='none'"/>
+          <span>marginfi</span>
+        </div>
+        <div class="proto-track"><div class="proto-fill"></div></div>
+        <div class="proto-val">$0.80B</div>
+      </div>
+      <div class="proto-bar" style="--pct:25.1%;--clr:#14F195">
+        <div class="proto-label">
+          <img src="https://assets.coingecko.com/coins/images/36170/small/kamino.png" alt="Kamino" onerror="this.style.display='none'"/>
+          <span>Kamino</span>
+        </div>
+        <div class="proto-track"><div class="proto-fill"></div></div>
+        <div class="proto-val">$0.66B</div>
+      </div>
+      <div class="proto-bar" style="--pct:25.1%;--clr:#E517AA">
+        <div class="proto-label">
+          <img src="https://assets.coingecko.com/coins/images/13928/small/PSigc4ie_400x400.jpg" alt="Raydium" onerror="this.style.display='none'"/>
+          <span>Raydium</span>
+        </div>
+        <div class="proto-track"><div class="proto-fill"></div></div>
+        <div class="proto-val">$0.66B</div>
+      </div>
+      <div class="proto-bar" style="--pct:13.3%;--clr:#DC1FFF">
+        <div class="proto-label">
+          <img src="https://assets.coingecko.com/coins/images/17547/small/Orca_Logo.png" alt="Orca" onerror="this.style.display='none'"/>
+          <span>Orca</span>
+        </div>
+        <div class="proto-track"><div class="proto-fill"></div></div>
+        <div class="proto-val">$0.35B</div>
+      </div>
+      <div class="proto-bar" style="--pct:10.6%;--clr:#03E1FF">
+        <div class="proto-label">
+          <img src="https://assets.coingecko.com/coins/images/35016/small/drift.png" alt="Drift" onerror="this.style.display='none'"/>
+          <span>Drift</span>
+        </div>
+        <div class="proto-track"><div class="proto-fill"></div></div>
+        <div class="proto-val">$0.28B</div>
+      </div>
+    </div>
+    <div class="chart-source">Source: DefiLlama · Surf</div>
+    <div class="insight">
+      <strong>Key insight:</strong> Jupiter's $2.63B TVL — 49% of the top-6 total — cements its role as Solana's central DeFi layer, spanning DEX aggregation, perpetuals, and liquidity infrastructure. Lending protocols (marginfi $0.80B, Kamino $0.66B) collectively hold $1.46B, reflecting growing demand for on-chain credit. Raydium and Orca AMM TVL trails lending, signalling that capital efficiency in yield-bearing vaults now attracts more locked value than pure liquidity provision.
+    </div>
+  </div>
+
+  <!-- Chart 6: DEX Weekly Volume (March) -->
+  <div class="card col-6">
+    <div class="card-title">Solana DEX Daily Volume (March Week 4)</div>
+    <div class="card-headline">Peaked at $2.65B on March 23</div>
+    <div class="card-sub">Billions USD • Source: Cryip Weekly On-Chain Report, SolanaFloor</div>
+    <canvas id="dexChart"></canvas>
+    <div class="chart-source">Source: Cryip Weekly On-Chain Report · SolanaFloor</div>
+    <div class="insight">
+      <strong>Key insight:</strong> Solana crossed $95M in total Q1 DEX volume, ranking #1 across all chains. Jupiter alone processed over $1 trillion cumulative. Late-March volume decline reflected broader macro volatility tied to global equities.
+    </div>
+  </div>
+
+  <!-- Chart 7: Alt Stablecoin share growth -->
+  <div class="card col-12">
+    <div class="card-title">Non-USDC/USDT Txn Volume Share on Solana</div>
+    <div class="card-headline">4.4% → 23.7% in 12 months</div>
+    <div class="card-sub">% of total stablecoin transaction volume • Source: Cryptopolitan, MEXC</div>
+    <canvas id="altShareChart"></canvas>
+    <div class="chart-source">Source: Cryptopolitan · MEXC Research</div>
+    <div class="insight">
+      <strong>Key insight:</strong> Yield-bearing stablecoins (USDe, sUSDe, USDY) and newer entrants drove the alternative stablecoin share to nearly a quarter of all Solana stablecoin transactions - a structural shift reflecting DeFi protocol integrations and higher yields vs. base stablecoins.
+    </div>
+  </div>
+
+<!-- Stablecoin Composition Table -->
+  <div class="card col-12">
+    <div class="card-title">Table - Stablecoin Breakdown on Solana (Q1 2026 Peak, Feb)</div>
+    <div class="card-headline">Full composition at the $16.8B ATH</div>
+    <div class="card-sub">Estimated from Artemis, DefiLlama, Chainstack, Cryptopolitan data</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Stablecoin</th>
+          <th>Type</th>
+          <th>Est. Solana Supply</th>
+          <th>Market Share</th>
+          <th>YoY Change</th>
+          <th>Key Utility on Solana</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>USDC</strong></td>
+          <td><span class="tag tag-fiat">Fiat-backed</span></td>
+          <td>~$8.5-9.0B</td>
+          <td>53%</td>
+          <td>+300% YoY transfer vol</td>
+          <td>Primary DEX/DeFi settlement, B2B payments</td>
+        </tr>
+        <tr>
+          <td><strong>USDT</strong></td>
+          <td><span class="tag tag-fiat">Fiat-backed</span></td>
+          <td>~$3.5-4.0B</td>
+          <td>22%</td>
+          <td>Modest growth</td>
+          <td>CEX on-ramp, retail trading pairs</td>
+        </tr>
+        <tr>
+          <td><strong>USDe / sUSDe</strong></td>
+          <td><span class="tag tag-yield">Yield-bearing</span></td>
+          <td>~$1.2-1.5B</td>
+          <td>~8%</td>
+          <td>+10× supply (alt segment)</td>
+          <td>Kamino collateral, yield vaults</td>
+        </tr>
+        <tr>
+          <td><strong>USDY (Ondo)</strong></td>
+          <td><span class="tag tag-yield">Yield-bearing</span></td>
+          <td>~$500-700M</td>
+          <td>~4%</td>
+          <td>New entrant</td>
+          <td>RWA-backed lending collateral</td>
+        </tr>
+        <tr>
+          <td><strong>PYUSD</strong></td>
+          <td><span class="tag tag-fiat">Fiat-backed</span></td>
+          <td>~$215M</td>
+          <td>~1.4%</td>
+          <td>Expanding</td>
+          <td>Cross-border payments, 70 markets</td>
+        </tr>
+        <tr>
+          <td><strong>USDS (Sky)</strong></td>
+          <td><span class="tag tag-crypto">Crypto-backed</span></td>
+          <td>~$300-500M</td>
+          <td>~2-3%</td>
+          <td>Wormhole NTT expansion</td>
+          <td>DeFi collateral, lending</td>
+        </tr>
+        <tr>
+          <td><strong>USDG / Others</strong></td>
+          <td><span class="tag tag-mixed">Mixed</span></td>
+          <td>~$1.0-1.5B</td>
+          <td>~8-9%</td>
+          <td>Growing alt segment</td>
+          <td>DEX liquidity, yield strategies</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div><!-- /grid -->
+
+<footer>
+  <div class="footer-author">
+    <span>Built by</span>
+    <strong>Aditya Khetarpal</strong>
+    <span class="footer-divider">·</span>
+    <a href="https://x.com/0xAditya_k" target="_blank" rel="noopener noreferrer" class="x-link">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      @0xAditya_k
+    </a>
+  </div>
+  <p style="margin-top:10px;">Data: <a href="https://app.artemisanalytics.com/stablecoins">Artemis</a> · <a href="https://defillama.com/stablecoins/solana">DefiLlama</a> · <a href="https://blog.cex.io/ecosystem/q1-2026-stablecoin-report-35459">CEX.io</a> · <a href="https://solana.com/news/state-of-solana-february-2026">Solana Foundation</a> · <a href="https://blog.syndica.io/deep-dive-solana-defi-february-2026/">Syndica</a> &nbsp;|&nbsp; Generated April 10, 2026</p>
+</footer>
+
+<script>
+  Chart.defaults.color = '#8896b0';
+  Chart.defaults.borderColor = '#2a3045';
+  Chart.defaults.font.family = 'Inter, -apple-system, sans-serif';
+
+  const PURPLE = '#9945ff';
+  const GREEN  = '#14f195';
+  const BLUE   = '#00c2ff';
+  const ORANGE = '#fb923c';
+  const RED    = '#f43f5e';
+  const PINK   = '#e879f9';
+  const YELLOW = '#facc15';
+
+  // ── Helper: gradient fill
+  function makeGrad(ctx, color, alpha1 = 0.35, alpha2 = 0.0) {
+    const g = ctx.createLinearGradient(0, 0, 0, 340);
+    g.addColorStop(0, color.replace(')', `, ${alpha1})`).replace('rgb', 'rgba'));
+    g.addColorStop(1, color.replace(')', `, ${alpha2})`).replace('rgb', 'rgba'));
+    return g;
+  }
+  function hexToRgb(hex) {
+    const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+    return `${r}, ${g}, ${b}`;
+  }
+  function grad(ctx, hex, a1=0.35, a2=0) {
+    const g = ctx.createLinearGradient(0,0,0,340);
+    g.addColorStop(0, `rgba(${hexToRgb(hex)}, ${a1})`);
+    g.addColorStop(1, `rgba(${hexToRgb(hex)}, ${a2})`);
+    return g;
+  }
+
+  // ── Chart 1: Stablecoin Supply ──────────────────────────────────
+  {
+    const ctx = document.getElementById('supplyChart').getContext('2d');
+    const labels = [
+      'Jan 1','Jan 5','Jan 10','Jan 15','Jan 20','Jan 25','Jan 31',
+      'Feb 5','Feb 10','Feb 15','Feb 20','Feb 25','Feb 28',
+      'Mar 5','Mar 10','Mar 15','Mar 20','Mar 25','Mar 31'
+    ];
+    const data = [14.0, 14.3, 14.7, 15.1, 15.3, 15.2, 15.2,
+                  15.5, 15.9, 16.4, 16.8, 16.6, 16.0,
+                  15.8, 15.9, 16.1, 15.9, 15.7, 15.7];
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Stablecoin Supply ($B)',
+          data,
+          borderColor: GREEN,
+          borderWidth: 2.5,
+          pointRadius: 3,
+          pointHoverRadius: 6,
+          pointBackgroundColor: GREEN,
+          pointBorderColor: '#080010',
+          fill: true,
+          backgroundColor: (ctx2) => grad(ctx2.chart.ctx, '#14F195', 0.35, 0),
+          tension: 0.45,
+        }]
+      },
+      options: {
+        responsive: true,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: 'rgba(22,14,50,0.97)',
+            borderColor: 'rgba(153,69,255,0.35)',
+            borderWidth: 1,
+            callbacks: { label: i => ` $${i.raw}B` }
+          },
+          annotation: {
+            annotations: {
+              ath: {
+                type: 'point',
+                xValue: 'Feb 20',
+                yValue: 16.8,
+                radius: 7,
+                backgroundColor: GREEN,
+                borderColor: '#fff',
+                borderWidth: 2,
+              },
+              athLabel: {
+                type: 'label',
+                xValue: 'Feb 20',
+                yValue: 16.8,
+                content: ['ATH $16.8B'],
+                color: GREEN,
+                font: { size: 11, weight: 'bold' },
+                position: { x: 'start', y: 'end' },
+                yAdjust: -20,
+              }
+            }
+          }
+        },
+        scales: {
+          x: { grid: { color: 'rgba(153,69,255,0.1)' }, ticks: { maxTicksLimit: 8 } },
+          y: {
+            grid: { color: 'rgba(153,69,255,0.1)' },
+            ticks: { callback: v => `$${v}B` },
+            min: 13, max: 17.5,
+          }
+        }
+      }
+    });
+  }
+
+  // ── Chart 2: Composition Donut ──────────────────────────────────
+  {
+    const ctx = document.getElementById('compositionChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['USDC', 'USDT', 'USDe/sUSDe', 'USDY', 'PYUSD', 'USDS', 'Others'],
+        datasets: [{
+          data: [53, 22, 8, 4, 1.4, 2.6, 9],
+          backgroundColor: ['#03E1FF', '#9945FF', '#DC1FFF', '#14F195', '#E517AA', '#7B5EA7', '#2D1B5E'],
+          borderColor: '#161a23',
+          borderWidth: 3,
+          hoverOffset: 8,
+        }]
+      },
+      options: {
+        cutout: '62%',
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: { padding: 12, font: { size: 11 }, boxWidth: 12 }
+          },
+          tooltip: {
+            backgroundColor: 'rgba(22,14,50,0.97)',
+            borderColor: 'rgba(153,69,255,0.35)',
+            borderWidth: 1,
+            callbacks: { label: i => ` ${i.label}: ${i.raw}%` }
+          }
+        }
+      }
+    });
+  }
+
+  // ── Chart 3: Monthly Txn Volume ──────────────────────────────────
+  {
+    const ctx = document.getElementById('volumeChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['October 2025\n(prev. record)', 'January 2026', 'February 2026\n(ATH)', 'March 2026'],
+        datasets: [{
+          label: 'Stablecoin Txn Volume ($B)',
+          data: [310, 375, 650, 425],
+          backgroundColor: [
+            'rgba(153,69,255,0.25)',
+            'rgba(3,225,255,0.35)',
+            'rgba(20,241,149,0.75)',
+            'rgba(3,225,255,0.35)',
+          ],
+          borderColor: [PURPLE, BLUE, GREEN, BLUE],
+          borderWidth: 2,
+          borderRadius: 6,
+          borderSkipped: false,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: 'rgba(22,14,50,0.97)',
+            borderColor: 'rgba(153,69,255,0.35)',
+            borderWidth: 1,
+            callbacks: { label: i => ` $${i.raw}B` }
+          }
+        },
+        scales: {
+          x: { grid: { display: false } },
+          y: {
+            grid: { color: 'rgba(153,69,255,0.1)' },
+            ticks: { callback: v => `$${v}B` },
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }
+
+  // ── Chart 4: SOL Price vs Supply Divergence ──────────────────────
+  {
+    const ctx = document.getElementById('divergenceChart').getContext('2d');
+    const labels = ['Jan 1','Jan 8','Jan 13','Jan 20','Jan 27','Feb 3','Feb 10','Feb 17','Feb 24','Mar 3','Mar 10','Mar 17','Mar 24','Mar 31'];
+    const solPrice = [124.9, 133.5, 145.4, 136.8, 122.4, 104.0, 88.5, 82.5, 78.3, 83.5, 88.0, 91.2, 89.5, 87.0];
+    const supplyB  = [14.0,  14.4,  14.9,  15.2,  15.2,  15.6,  16.1,  16.6, 16.8,  15.8,  16.0,  16.1, 15.8,  15.7];
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'SOL Price (USD)',
+            data: solPrice,
+            borderColor: '#DC1FFF',
+            borderWidth: 2.5,
+            pointRadius: 2,
+            fill: false,
+            tension: 0.4,
+            yAxisID: 'yPrice',
+          },
+          {
+            label: 'Stablecoin Supply ($B)',
+            data: supplyB,
+            borderColor: GREEN,
+            borderWidth: 2.5,
+            pointRadius: 2,
+            fill: true,
+            backgroundColor: (c) => grad(c.chart.ctx, '#14F195', 0.25, 0),
+            tension: 0.4,
+            yAxisID: 'ySupply',
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: { font: { size: 11 }, boxWidth: 14 }
+          },
+          tooltip: {
+            backgroundColor: 'rgba(22,14,50,0.97)',
+            borderColor: 'rgba(153,69,255,0.35)',
+            borderWidth: 1,
+          }
+        },
+        scales: {
+          x: { grid: { color: 'rgba(153,69,255,0.1)' }, ticks: { maxTicksLimit: 7 } },
+          yPrice: {
+            type: 'linear', position: 'left',
+            grid: { color: 'rgba(153,69,255,0.1)' },
+            ticks: { callback: v => `$${v}` },
+            min: 60, max: 160,
+          },
+          ySupply: {
+            type: 'linear', position: 'right',
+            grid: { display: false },
+            ticks: { callback: v => `$${v}B` },
+            min: 12, max: 18,
+          }
+        }
+      }
+    });
+  }
+
+  // Chart 5 rendered as custom HTML bar chart with logos
+
+  // ── Chart 6: DEX Daily Volume (March week 4) ──────────────────
+  {
+    const ctx = document.getElementById('dexChart').getContext('2d');
+    const labels = ['Mar 23','Mar 24','Mar 25','Mar 26','Mar 27','Mar 28','Mar 29'];
+    const data   = [2.65, 2.41, 2.10, 1.88, 1.65, 1.40, 1.26];
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{
+          label: 'DEX Volume ($B)',
+          data,
+          backgroundColor: data.map((v, i) =>
+            i === 0 ? 'rgba(153,69,255,0.85)' : `rgba(153,69,255,${0.2 + (data.length - i) * 0.07})`
+          ),
+          borderColor: PURPLE,
+          borderWidth: 2,
+          borderRadius: 6,
+          borderSkipped: false,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: 'rgba(22,14,50,0.97)',
+            borderColor: 'rgba(153,69,255,0.35)',
+            borderWidth: 1,
+            callbacks: { label: i => ` $${i.raw}B` }
+          }
+        },
+        scales: {
+          x: { grid: { display: false } },
+          y: {
+            grid: { color: 'rgba(153,69,255,0.1)' },
+            ticks: { callback: v => `$${v}B` },
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }
+
+  // ── Chart 7: Alt Stablecoin Share ──────────────────────────────
+  {
+    const ctx = document.getElementById('altShareChart').getContext('2d');
+    const labels = ['Jan 25','Mar 25','May 25','Jul 25','Sep 25','Nov 25','Jan 26','Mar 26'];
+    const data   = [4.4, 5.8, 7.5, 9.2, 12.1, 16.8, 23.7, 24.5];
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Alt Stablecoin Txn Share (%)',
+          data,
+          borderColor: ORANGE,
+          borderWidth: 2.5,
+          pointRadius: 4,
+          pointHoverRadius: 7,
+          pointBackgroundColor: ORANGE,
+          fill: true,
+          backgroundColor: (c) => grad(c.chart.ctx, '#fb923c', 0.3, 0),
+          tension: 0.4,
+        }]
+      },
+      options: {
+        responsive: true,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: 'rgba(22,14,50,0.97)',
+            borderColor: 'rgba(153,69,255,0.35)',
+            borderWidth: 1,
+            callbacks: { label: i => ` ${i.raw}%` }
+          }
+        },
+        scales: {
+          x: { grid: { color: 'rgba(153,69,255,0.1)' } },
+          y: {
+            grid: { color: 'rgba(153,69,255,0.1)' },
+            ticks: { callback: v => `${v}%` },
+            min: 0, max: 30,
+          }
+        }
+      }
+    });
+  }
+
+</script>
+
+<!-- ── Q2 SUBSCRIBE MODAL ── -->
+<style>
+  #subOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 4, 20, 0.82);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 9000;
+    align-items: center;
+    justify-content: center;
+  }
+  #subOverlay.visible { display: flex; }
+
+  #subModal {
+    background: linear-gradient(160deg, #1a0f3a 0%, #120a2e 60%, #0a1520 100%);
+    border: 1px solid rgba(153,69,255,0.4);
+    border-radius: 20px;
+    padding: 44px 40px 36px;
+    width: 100%;
+    max-width: 440px;
+    margin: 16px;
+    text-align: center;
+    position: relative;
+    box-shadow:
+      0 0 0 1px rgba(153,69,255,0.12),
+      0 8px 64px rgba(153,69,255,0.2),
+      0 2px 8px rgba(0,0,0,0.7);
+    animation: subSlideUp 0.35s cubic-bezier(.22,.61,.36,1) both;
+  }
+  @keyframes subSlideUp {
+    from { opacity: 0; transform: translateY(24px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0)   scale(1);    }
+  }
+
+  /* top gradient line */
+  #subModal::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    border-radius: 20px 20px 0 0;
+    background: linear-gradient(90deg, #9945FF 0%, #14F195 50%, #03E1FF 100%);
+  }
+
+  /* glow orb behind icon */
+  .sub-orb {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(153,69,255,0.35) 0%, rgba(20,241,149,0.1) 60%, transparent 100%);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+    border: 1px solid rgba(153,69,255,0.3);
+    font-size: 28px;
+  }
+
+  .sub-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #14F195;
+    margin-bottom: 10px;
+  }
+  .sub-title {
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin-bottom: 8px;
+    line-height: 1.25;
+  }
+  .sub-desc {
+    font-size: 13px;
+    color: #b0a3d4;
+    line-height: 1.65;
+    margin-bottom: 26px;
+  }
+
+  .sub-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .sub-input {
+    flex: 1;
+    background: rgba(153,69,255,0.08);
+    border: 1px solid rgba(153,69,255,0.35);
+    border-radius: 10px;
+    padding: 11px 14px;
+    font-size: 13px;
+    color: #F0EBF8;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: inherit;
+  }
+  .sub-input::placeholder { color: rgba(176,163,212,0.5); }
+  .sub-input:focus {
+    border-color: rgba(153,69,255,0.7);
+    box-shadow: 0 0 0 3px rgba(153,69,255,0.12);
+  }
+  .sub-btn {
+    background: linear-gradient(90deg, #9945FF, #14F195);
+    border: none;
+    border-radius: 10px;
+    padding: 11px 20px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #0a0020;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.2s, transform 0.15s;
+    font-family: inherit;
+  }
+  .sub-btn:hover  { opacity: 0.9; transform: scale(1.02); }
+  .sub-btn:active { transform: scale(0.98); }
+  .sub-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  .sub-success {
+    display: none;
+    color: #14F195;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    padding: 10px 14px;
+    background: rgba(20,241,149,0.08);
+    border: 1px solid rgba(20,241,149,0.25);
+    border-radius: 8px;
+  }
+  .sub-error {
+    display: none;
+    color: #f43f5e;
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+
+  .sub-dismiss {
+    background: none;
+    border: none;
+    color: #b0a3d4;
+    font-size: 13px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: color 0.2s;
+    font-family: inherit;
+  }
+  .sub-dismiss:hover { color: #F0EBF8; }
+  .sub-dismiss svg  { transition: transform 0.2s; }
+  .sub-dismiss:hover svg { transform: translateX(3px); }
+</style>
+
+<div id="subOverlay" role="dialog" aria-modal="true" aria-label="Subscribe to Q2 2026 Report">
+  <div id="subModal">
+    <div class="sub-orb">◎</div>
+    <div class="sub-label">solanastablecoin.bingo</div>
+    <div class="sub-title">Q2 2026 Report<br>is coming</div>
+    <div class="sub-desc">
+      You just read the Q1 deep-dive.<br>
+      Drop your email and we'll send you Q2 the moment it publishes — on-chain data, DeFi TVL, stablecoin flows and all.
+    </div>
+
+    <div class="sub-success" id="subSuccess">
+      You're on the list. Watch your inbox in July.
+    </div>
+    <div class="sub-error" id="subError"></div>
+
+    <div class="sub-row" id="subForm">
+      <input
+        class="sub-input"
+        id="subEmail"
+        type="email"
+        placeholder="your@email.com"
+        autocomplete="email"
+        maxlength="254"
+      />
+      <button class="sub-btn" id="subSubmit" type="button">Notify me</button>
+    </div>
+
+    <button class="sub-dismiss" id="subDismiss" type="button">
+      No thanks
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+(function () {
+  var STORAGE_KEY = 'sub_dismissed_v1';
+  var overlay     = document.getElementById('subOverlay');
+  var emailInput  = document.getElementById('subEmail');
+  var submitBtn   = document.getElementById('subSubmit');
+  var dismissBtn  = document.getElementById('subDismiss');
+  var successBox  = document.getElementById('subSuccess');
+  var errorBox    = document.getElementById('subError');
+  var formRow     = document.getElementById('subForm');
+  var shown       = false;
+
+  function show() {
+    if (shown) return;
+    if (localStorage.getItem(STORAGE_KEY)) return;
+    shown = true;
+    overlay.classList.add('visible');
+    emailInput.focus();
+  }
+
+  function hide(permanent) {
+    overlay.classList.remove('visible');
+    if (permanent) localStorage.setItem(STORAGE_KEY, '1');
+  }
+
+  // Trigger after user scrolls 70% of page
+  window.addEventListener('scroll', function () {
+    var scrolled = window.scrollY + window.innerHeight;
+    var total    = document.documentElement.scrollHeight;
+    if (scrolled / total >= 0.70) show();
+  }, { passive: true });
+
+  // Dismiss
+  dismissBtn.addEventListener('click', function () { hide(true); });
+
+  // Close on backdrop click
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) hide(true);
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') hide(true);
+  });
+
+  // Submit
+  submitBtn.addEventListener('click', function () { doSubmit(); });
+  emailInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') doSubmit();
+  });
+
+  function doSubmit() {
+    var email = emailInput.value.trim();
+    errorBox.style.display = 'none';
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errorBox.textContent = 'Please enter a valid email address.';
+      errorBox.style.display = 'block';
+      emailInput.focus();
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Saving…';
+
+    fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, source: 'Q1 2026 Report' }),
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.ok) {
+          formRow.style.display    = 'none';
+          successBox.style.display = 'block';
+          localStorage.setItem(STORAGE_KEY, '1');
+          setTimeout(function () { hide(false); }, 3000);
+        } else {
+          throw new Error(data.error || 'Something went wrong');
+        }
+      })
+      .catch(function (e) {
+        errorBox.textContent   = e.message || 'Could not subscribe. Try again.';
+        errorBox.style.display = 'block';
+        submitBtn.disabled     = false;
+        submitBtn.textContent  = 'Notify me';
+      });
+  }
+})();
+</script>
+</body>
+</html>

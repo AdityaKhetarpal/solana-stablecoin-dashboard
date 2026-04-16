@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0f"/>
+      <stop offset="100%" style="stop-color:#0f0f1a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#9945FF"/>
+      <stop offset="100%" style="stop-color:#14F195"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#12121e"/>
+    </linearGradient>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="20" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Grid -->
+  <g opacity="0.04" stroke="#ffffff" stroke-width="1">
+    <line x1="0" y1="126" x2="1200" y2="126"/>
+    <line x1="0" y1="252" x2="1200" y2="252"/>
+    <line x1="0" y1="378" x2="1200" y2="378"/>
+    <line x1="0" y1="504" x2="1200" y2="504"/>
+    <line x1="240" y1="0" x2="240" y2="630"/>
+    <line x1="480" y1="0" x2="480" y2="630"/>
+    <line x1="720" y1="0" x2="720" y2="630"/>
+    <line x1="960" y1="0" x2="960" y2="630"/>
+  </g>
+
+  <!-- Glow orbs -->
+  <circle cx="1050" cy="150" r="200" fill="#9945FF" opacity="0.05" filter="url(#softglow)"/>
+  <circle cx="200" cy="500" r="150" fill="#14F195" opacity="0.05" filter="url(#softglow)"/>
+
+  <!-- Top accent bar -->
+  <rect x="0" y="0" width="1200" height="4" fill="url(#accent)"/>
+
+  <!-- Report badge -->
+  <rect x="80" y="58" width="120" height="30" rx="15" fill="#9945FF20" stroke="#9945FF40" stroke-width="1"/>
+  <text x="140" y="78" font-family="'Arial', 'Helvetica', sans-serif" font-size="12" fill="#9945FF" text-anchor="middle" font-weight="700" letter-spacing="1">RESEARCH</text>
+
+  <!-- Main title -->
+  <text x="80" y="170" font-family="'Arial', 'Helvetica', sans-serif" font-size="52" font-weight="700" fill="#ffffff" letter-spacing="-1">Q1 2026 Report</text>
+  <text x="80" y="235" font-family="'Arial', 'Helvetica', sans-serif" font-size="26" fill="#8888aa" font-weight="400">Solana Stablecoin Deep Dive</text>
+
+  <!-- Gradient underline -->
+  <rect x="80" y="252" width="280" height="4" rx="2" fill="url(#accent)"/>
+
+  <!-- Key findings -->
+  <text x="80" y="305" font-family="'Arial', 'Helvetica', sans-serif" font-size="14" fill="#555577" font-weight="600" letter-spacing="1.5">KEY FINDINGS</text>
+
+  <g>
+    <circle cx="92" cy="338" r="3" fill="#14F195"/>
+    <text x="108" y="343" font-family="'Arial', 'Helvetica', sans-serif" font-size="16" fill="#ccccdd">$16.8B all-time high stablecoin supply reached</text>
+  </g>
+  <g>
+    <circle cx="92" cy="374" r="3" fill="#9945FF"/>
+    <text x="108" y="379" font-family="'Arial', 'Helvetica', sans-serif" font-size="16" fill="#ccccdd">USDC maintained 55%+ dominance on-chain</text>
+  </g>
+  <g>
+    <circle cx="92" cy="410" r="3" fill="#14F195" opacity="0.7"/>
+    <text x="108" y="415" font-family="'Arial', 'Helvetica', sans-serif" font-size="16" fill="#ccccdd">USDG emerged as a new challenger asset</text>
+  </g>
+  <g>
+    <circle cx="92" cy="446" r="3" fill="#9945FF" opacity="0.7"/>
+    <text x="108" y="451" font-family="'Arial', 'Helvetica', sans-serif" font-size="16" fill="#ccccdd">Solana ranked #2 stablecoin chain by volume</text>
+  </g>
+
+  <!-- Right side: stats -->
+  <rect x="760" y="100" width="360" height="420" rx="14" fill="#0d0d18" stroke="#1e1e30" stroke-width="1"/>
+
+  <text x="940" y="148" font-family="'Arial', 'Helvetica', sans-serif" font-size="12" fill="#444466" text-anchor="middle" font-weight="600" letter-spacing="1.5">Q1 2026 SNAPSHOT</text>
+  <line x1="800" y1="162" x2="1080" y2="162" stroke="#1e1e30" stroke-width="1"/>
+
+  <!-- Stat rows -->
+  <text x="800" y="200" font-family="'Arial', 'Helvetica', sans-serif" font-size="13" fill="#555577">ATH Supply</text>
+  <text x="1100" y="200" font-family="'Arial', 'Helvetica', sans-serif" font-size="18" font-weight="700" fill="#14F195" text-anchor="end">$16.8B</text>
+  <line x1="800" y1="215" x2="1080" y2="215" stroke="#1a1a28" stroke-width="1"/>
+
+  <text x="800" y="253" font-family="'Arial', 'Helvetica', sans-serif" font-size="13" fill="#555577">USDC Share</text>
+  <text x="1100" y="253" font-family="'Arial', 'Helvetica', sans-serif" font-size="18" font-weight="700" fill="#9945FF" text-anchor="end">55.2%</text>
+  <line x1="800" y1="268" x2="1080" y2="268" stroke="#1a1a28" stroke-width="1"/>
+
+  <text x="800" y="306" font-family="'Arial', 'Helvetica', sans-serif" font-size="13" fill="#555577">Chain Rank</text>
+  <text x="1100" y="306" font-family="'Arial', 'Helvetica', sans-serif" font-size="18" font-weight="700" fill="#ffffff" text-anchor="end">#2</text>
+  <line x1="800" y1="321" x2="1080" y2="321" stroke="#1a1a28" stroke-width="1"/>
+
+  <text x="800" y="359" font-family="'Arial', 'Helvetica', sans-serif" font-size="13" fill="#555577">QoQ Growth</text>
+  <text x="1100" y="359" font-family="'Arial', 'Helvetica', sans-serif" font-size="18" font-weight="700" fill="#14F195" text-anchor="end">+23%</text>
+  <line x1="800" y1="374" x2="1080" y2="374" stroke="#1a1a28" stroke-width="1"/>
+
+  <text x="800" y="412" font-family="'Arial', 'Helvetica', sans-serif" font-size="13" fill="#555577">Stablecoins</text>
+  <text x="1100" y="412" font-family="'Arial', 'Helvetica', sans-serif" font-size="18" font-weight="700" fill="#ffffff" text-anchor="end">8 assets</text>
+  <line x1="800" y1="427" x2="1080" y2="427" stroke="#1a1a28" stroke-width="1"/>
+
+  <text x="800" y="465" font-family="'Arial', 'Helvetica', sans-serif" font-size="13" fill="#555577">Period</text>
+  <text x="1100" y="465" font-family="'Arial', 'Helvetica', sans-serif" font-size="18" font-weight="700" fill="#ffffff" text-anchor="end">Jan – Mar 2026</text>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="590" width="1200" height="40" fill="#0d0d18"/>
+  <text x="80" y="616" font-family="'Arial', 'Helvetica', sans-serif" font-size="14" fill="#444466">solanastablecoin.bingo/q1-2026</text>
+  <text x="1120" y="616" font-family="'Arial', 'Helvetica', sans-serif" font-size="14" fill="#444466" text-anchor="end">Solana Stablecoin Analytics</text>
+</svg>
