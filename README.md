@@ -2,7 +2,7 @@
 
 > Real-time analytics for Solana's $16B+ stablecoin market — live supply charts, peg health, DeFi TVL, SOL price, cross-chain rankings, and free quarterly research reports.
 
-**Live site:** [solanastablecoin.bingo](https://solanastablecoin.bingo)
+**Live site:** [solanastablecoin.vercel.app](https://solanastablecoin.vercel.app/)
 
 ---
 
