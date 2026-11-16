@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Q2 2026 Solana Stablecoin Report | Coming Soon · Solana Stablecoin Analytics</title>
-  <meta name="description" content="Q2 2026 Solana stablecoin research report coming soon. Follow live supply trends, DeFi TVL, and on-chain stablecoin data at solanastablecoin.bingo while you wait."/>
-  <meta name="keywords" content="Solana stablecoin Q2 2026, Solana stablecoin report Q2, stablecoin analytics 2026, Solana DeFi Q2 2026, on-chain stablecoin research, Solana stablecoin growth 2026"/>
+  <title>Q2 2026 Solana Stablecoin Report | $14.6B Supply, USDC Share Falls to 50%, USDG Rises</title>
+  <meta name="description" content="Q2 2026: Solana stablecoin supply rose 2.4% to $14.6B while SOL fell 9.5% and DeFi TVL dropped 20%. USDC share slipped to 50%, USDG grew 52%, and BSC edged Solana for #3."/>
+  <meta name="keywords" content="Solana stablecoin Q2 2026, Solana stablecoin report Q2 2026, USDC Solana share, USDG Solana, USD1 Solana, Solana stablecoin supply June 2026, Solana DeFi TVL Q2 2026, Solana vs BSC stablecoins, stablecoin research report"/>
   <meta name="robots" content="index, follow"/>
   <meta name="author" content="Aditya Khetarpal"/>
   <meta name="geo.region" content="US"/>
@@ -13,50 +13,119 @@
   <link rel="canonical" href="https://solanastablecoin.bingo/q2-2026"/>
 
   <!-- Open Graph -->
-  <meta property="og:type" content="website"/>
+  <meta property="og:type" content="article"/>
   <meta property="og:url" content="https://solanastablecoin.bingo/q2-2026"/>
-  <meta property="og:title" content="Q2 2026 Solana Stablecoin Report — Coming Soon"/>
-  <meta property="og:description" content="The Q2 2026 Solana stablecoin deep-dive is in progress. Track live supply, peg health, and DeFi TVL on the dashboard while you wait for the full quarterly report."/>
+  <meta property="og:title" content="Q2 2026 Solana Stablecoin Report | Supply +2.4% While SOL Fell"/>
+  <meta property="og:description" content="Q2 2026: Solana stablecoin supply rose 2.4% to $14.6B while SOL fell 9.5% and DeFi TVL dropped 20%. USDC share slipped to 50%, USDG grew 52%, and BSC edged Solana for #3."/>
   <meta property="og:site_name" content="Solana Stablecoin Analytics"/>
   <meta property="og:image" content="https://solanastablecoin.vercel.app/og.png"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
-  <meta property="og:image:alt" content="Solana Stablecoin Analytics — Q2 2026 quarterly report coming soon"/>
+  <meta property="og:image:alt" content="Q2 2026 Solana Stablecoin Report | Supply +2.4% While SOL Fell"/>
   <meta property="og:locale" content="en_US"/>
+  <meta property="article:published_time" content="2026-11-16"/>
+  <meta property="article:author" content="https://x.com/0xAditya_k"/>
+  <meta property="article:section" content="Crypto Research"/>
+  <meta property="article:tag" content="Solana"/>
+  <meta property="article:tag" content="Stablecoin"/>
+  <meta property="article:tag" content="DeFi"/>
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:site" content="@0xAditya_k"/>
   <meta name="twitter:creator" content="@0xAditya_k"/>
-  <meta name="twitter:title" content="Q2 2026 Solana Stablecoin Report — Coming Soon"/>
-  <meta name="twitter:description" content="Q2 2026 Solana stablecoin research report dropping soon. In the meantime, track live supply, peg health, and DeFi TVL at solanastablecoin.bingo/live"/>
+  <meta name="twitter:title" content="Q2 2026 Solana Stablecoin Report | Supply +2.4% While SOL Fell"/>
+  <meta name="twitter:description" content="Solana stablecoins grew 2.4% to $14.6B in Q2 2026 as SOL fell and TVL dropped 20%. USDC share hit 50%, USDG +52%, USD1 +16%. Full data breakdown."/>
   <meta name="twitter:image" content="https://solanastablecoin.vercel.app/og.png"/>
-  <meta name="twitter:image:alt" content="Solana Stablecoin Analytics — Q2 2026 report coming soon"/>
+  <meta name="twitter:image:alt" content="Q2 2026 Solana Stablecoin Report | Supply +2.4% While SOL Fell"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
   <style>
-    :root{--bg:#F4F3EE;--surface:#FDFCF9;--border:#DDD9CE;--ink:#18171A;--muted:#706C62;--faint:#A8A49A;--teal:#0A7C6B;--teal-light:#E2F2EF;}
+    :root {
+      --bg:#F4F3EE; --surface:#FDFCF9; --surface2:#ECEAE3;
+      --border:#DDD9CE; --border-dark:#C4BFB0;
+      --ink:#18171A; --muted:#706C62; --faint:#A8A49A;
+      --teal:#0A7C6B; --teal-light:#E2F2EF; --teal-mid:#5DB8A8;
+      --up:#1A7F4B; --up-light:#DCF5E7;
+      --down:#C0392B; --down-light:#FDECEA;
+      --amber:#C27C0E; --amber-light:#FDF3DC;
+      --slate:#3B5A8A; --slate-light:#E4EBF5;
+    }
     *{box-sizing:border-box;margin:0;padding:0;}
-    body{background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,sans-serif;min-height:100vh;display:flex;flex-direction:column;}
-    nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;}
-    .nav-brand{font-size:14px;font-weight:700;color:var(--teal);text-decoration:none;}
+    body{background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,sans-serif;font-size:14px;line-height:1.6;}
+
+    nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+    .nav-left{display:flex;align-items:center;gap:16px;}
+    .nav-brand{font-size:14px;font-weight:700;color:var(--teal);letter-spacing:-0.3px;text-decoration:none;}
     .nav-brand span{color:var(--muted);font-weight:400;}
+    .nav-sep{color:var(--border);font-size:16px;}
+    .nav-page{font-size:13px;color:var(--muted);font-weight:500;}
     .nav-pill{background:var(--teal);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;text-decoration:none;}
-    .center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px;}
-    .tag{background:var(--teal-light);color:var(--teal);font-size:11px;font-weight:800;letter-spacing:1px;padding:5px 12px;border-radius:20px;text-transform:uppercase;margin-bottom:24px;}
-    h1{font-size:clamp(28px,5vw,44px);font-weight:900;letter-spacing:-1px;margin-bottom:14px;}
-    p{font-size:16px;color:var(--muted);max-width:440px;line-height:1.7;margin-bottom:28px;}
-    .date{font-size:13px;color:var(--faint);margin-bottom:28px;}
-    .btn{background:var(--teal);color:#fff;font-size:13px;font-weight:700;padding:11px 24px;border-radius:10px;text-decoration:none;}
-    footer{padding:20px;text-align:center;font-size:11px;color:var(--faint);border-top:1px solid var(--border);}
+
+    .report-wrap{max-width:1080px;margin:0 auto;padding:40px 24px 80px;}
+
+    /* Big idea */
+    .big-idea{background:var(--teal);color:#fff;border-radius:16px;padding:36px 40px;margin-bottom:32px;}
+    .bi-eyebrow{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#000;margin-bottom:10px;}
+    .bi-headline{font-size:clamp(20px,3vw,28px);font-weight:900;line-height:1.2;letter-spacing:-0.5px;margin-bottom:12px;}
+    .bi-body{font-size:14px;opacity:0.85;line-height:1.7;max-width:700px;}
+
+    /* Insights */
+    .insights{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px;}
+    .ins-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 22px;}
+    .ins-n{font-size:10px;font-weight:800;color:var(--teal);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
+    .ins-card h4{font-size:14px;font-weight:700;margin-bottom:6px;color:var(--ink);}
+    .ins-card p{font-size:12px;color:var(--muted);line-height:1.6;}
+
+    /* KPIs */
+    .kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:28px;}
+    .kpi{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;}
+    .kpi .label{font-size:10px;color:var(--faint);font-weight:500;margin-bottom:3px;}
+    .kpi .value{font-size:20px;font-weight:800;letter-spacing:-0.5px;line-height:1.1;}
+    .kpi .sub{font-size:10px;color:var(--muted);margin-top:2px;}
+    .kpi .value.teal{color:var(--teal);} .kpi .value.up{color:var(--up);}
+    .kpi .value.down{color:var(--down);} .kpi .value.slate{color:var(--slate);}
+    .kpi .value.amber{color:var(--amber);} .kpi .value.ink{color:var(--ink);}
+
+    /* Charts */
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+    .grid-full{margin-bottom:16px;}
+
+    .c-eyebrow{font-size:10px;font-weight:700;letter-spacing:1.2px;color:var(--teal);text-transform:uppercase;margin-bottom:5px;}
+    .c-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:3px;}
+    .c-sub{font-size:11px;color:var(--faint);margin-bottom:14px;}
+    .chart-box{position:relative;}
+    .chart-box.h260{height:260px;} .chart-box.h220{height:220px;}
+    .chart-box.h200{height:200px;} .chart-box.h170{height:170px;}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px 24px;display:flex;flex-direction:column;}
+    .callout{background:var(--teal-light);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:12px 16px;margin-top:auto;padding-top:14px;}
+    .c-label{font-size:10px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px;}
+    .callout p,.callout{font-size:12px;color:var(--muted);line-height:1.6;}
+
+    /* Sources */
+    .sources{margin-bottom:48px;}
+    .src-btn{background:none;border:1px solid var(--border);border-radius:8px;padding:10px 16px;font-size:12px;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;}
+    .src-body{display:none;background:var(--surface);border:1px solid var(--border);border-radius:0 0 8px 8px;border-top:none;padding:4px 0;}
+    .src-body.open{display:block;}
+    .src-row{display:grid;grid-template-columns:160px 1fr;gap:12px;padding:10px 16px;border-bottom:1px solid var(--surface2);}
+    .src-row:last-child{border-bottom:none;}
+    .src-key{font-size:11px;font-weight:600;color:var(--ink);}
+    .src-val{font-size:11px;color:var(--muted);}
+
+    footer{border-top:1px solid var(--border);padding:22px 24px;text-align:center;font-size:11px;color:var(--faint);}
     footer a{color:var(--teal);text-decoration:none;}
-    [data-theme="dark"]{--bg:#111110;--surface:#1C1B19;--surface2:#242320;--border:#302E2A;--border-dark:#3E3B36;--ink:#EDE9E0;--muted:#9A9488;--faint:#5E5A55;--teal:#12A88F;--teal-light:#0D2620;--teal-mid:#1A5E52;}
+    footer a:hover{text-decoration:underline;}
+
+    /* ── DARK THEME ── */
+    [data-theme="dark"]{--bg:#111110;--surface:#1C1B19;--surface2:#242320;--border:#302E2A;--border-dark:#3E3B36;--ink:#EDE9E0;--muted:#9A9488;--faint:#5E5A55;--teal:#12A88F;--teal-light:#0D2620;--teal-mid:#1A5E52;--up:#22A460;--up-light:#0E2A1A;--down:#D94F45;--down-light:#2A1210;--amber:#D4912A;--amber-light:#2A1E08;--slate:#5B82BA;--slate-light:#121E30;}
     .theme-btn{background:var(--surface2);border:1px solid var(--border);color:var(--muted);width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.15s;}
     .theme-btn:hover{background:var(--border);}
     .nav-right{display:flex;align-items:center;gap:8px;}
     .ai-wrap{position:relative;}
-    .ai-btn{background:var(--surface);border:1px solid var(--border);color:var(--ink);font-size:11px;font-weight:600;padding:5px 10px;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:4px;white-space:nowrap;font-family:inherit;}
+    .ai-btn{background:var(--surface);border:1px solid var(--border);color:var(--ink);font-size:11px;font-weight:600;padding:5px 10px;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:4px;white-space:nowrap;font-family:inherit;transition:border-color 0.15s;}
+    .ai-btn:hover{border-color:var(--border-dark);}
     .ai-btn-short{display:none;}
     .ai-menu{display:none;position:absolute;right:0;top:calc(100% + 6px);background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.15);min-width:230px;z-index:999;overflow:hidden;}
     .ai-menu.open{display:block;}
@@ -66,55 +135,768 @@
     .ai-icon{width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;margin-top:1px;}
     .ai-icon-gpt{background:#fff;border:1px solid #e5e7eb;}
     .ai-icon-claude{background:#fff;border:1px solid #e5e7eb;}
-    .ai-icon-md{background:#7C5CBF;color:#fff;}
-    .ai-icon-copy{background:#5A6878;color:#fff;}
     .ai-item-title{font-size:12px;font-weight:600;color:var(--ink);}
     .ai-item-sub{font-size:10px;color:var(--faint);margin-top:1px;}
+    /* Chart source - below chart, right-aligned */
+    .chart-src{display:block;text-align:right;font-size:9px;font-weight:700;color:var(--faint);letter-spacing:0.3px;margin-top:4px;padding-right:2px;}
+    /* ── INFO ICON ── */
+    .card-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:0;}
+    .card-hd-text{flex:1;}
+    .info-wrap{position:relative;flex-shrink:0;}
+    .info-btn{width:18px;height:18px;border-radius:50%;background:var(--teal-light);border:1.5px solid var(--teal-mid);color:var(--teal);font-size:10px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;margin-top:1px;font-family:Georgia,serif;font-style:italic;transition:background 0.15s;}
+    .info-btn:hover{background:var(--teal);color:#fff;border-color:var(--teal);}
+    .info-tooltip{display:none;position:absolute;right:0;top:calc(100% + 8px);background:var(--ink);color:var(--bg);font-size:11px;line-height:1.55;padding:9px 12px;border-radius:9px;z-index:500;width:230px;box-shadow:0 6px 20px rgba(0,0,0,0.22);font-style:normal;font-family:'Inter',-apple-system,sans-serif;}
+    .info-tooltip::before{content:'';position:absolute;top:-5px;right:5px;width:10px;height:10px;background:var(--ink);transform:rotate(45deg);border-radius:2px;}
+    .info-wrap:hover .info-tooltip{display:block;}
+    /* AI dropdown extra icons */
+    .ai-icon-copy{background:#5A6878;color:#fff;}
+    .ai-icon-md{background:#7C5CBF;color:#fff;}
+
+    @media(max-width:768px){
+      .grid-2{grid-template-columns:1fr;}
+      .insights{grid-template-columns:1fr;}
+      .kpi-grid{grid-template-columns:repeat(2,1fr);}
+      .report-wrap{padding:24px 16px 60px;}
+      .big-idea{padding:24px 20px;border-radius:12px;}
+      .bi-headline{font-size:clamp(17px,4vw,22px);}
+      .card{padding:16px 18px;}
+      .chart-box.h260{height:200px;}
+      .chart-box.h220{height:180px;}
+      .chart-box.h200{height:170px;}
+      .chart-box.h170{height:150px;}
+      .src-row{grid-template-columns:1fr;gap:4px;}
+      .nav-page{display:none;}
+      .nav-sep{display:none;}
+    }
     @media(max-width:480px){
-      nav{padding:0 16px;}
+      nav{padding:0 14px;}
       .nav-brand span{display:none;}
-      .center{padding:32px 16px;}
-      p{font-size:14px;}
       .ai-btn-full{display:none;}
       .ai-btn-short{display:inline;}
+      .kpi-grid{grid-template-columns:repeat(2,1fr);}
+      .kpi .value{font-size:18px;}
+      .bi-body{font-size:13px;}
     }
+
+    .peg-table{width:100%;border-collapse:collapse;margin:14px 0 4px;}
+    .peg-table th{text-align:left;font-size:10px;font-weight:700;color:var(--faint);text-transform:uppercase;letter-spacing:0.5px;padding:0 8px 8px 0;border-bottom:2px solid var(--border);}
+    .peg-table td{padding:9px 8px 9px 0;font-size:12px;color:var(--muted);border-bottom:1px solid var(--surface2);}
+    .peg-table td:first-child{font-weight:700;color:var(--ink);}
+    .pill-ok{display:inline-block;background:var(--up-light);color:var(--up);font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;}
+    .pill-warn{display:inline-block;background:var(--amber-light);color:var(--amber);font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;}
+    .rep-nav{display:flex;justify-content:space-between;gap:12px;margin:0 0 48px;}
+    .rep-nav a{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 20px;text-decoration:none;color:var(--ink);font-size:13px;font-weight:700;}
+    .rep-nav a span{display:block;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--teal);margin-bottom:4px;}
+    .rep-nav a:hover{border-color:var(--border-dark);}
+    .rep-nav a.next{text-align:right;}
   </style>
 </head>
 <body>
+
 <nav>
-  <a href="/" class="nav-brand">Solana Stablecoin<span> Analytics</span></a>
+  <div class="nav-left">
+    <a href="/" class="nav-brand">Solana Stablecoin<span> Analytics</span></a>
+    <span class="nav-sep">/</span>
+    <span class="nav-page">Q2 2026</span>
+  </div>
   <div class="nav-right">
     <a href="/live" class="nav-pill">Live →</a>
     <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme"><span id="themeIcon">◑</span></button>
     <div class="ai-wrap" id="aiWrap">
       <button class="ai-btn" onclick="toggleAiMenu()"><span class="ai-btn-full">Ask AI</span><span class="ai-btn-short">AI</span> ▾</button>
       <div class="ai-menu" id="aiMenu">
-        <a class="ai-item" id="aiGPT" href="#" target="_blank" rel="noopener"><div class="ai-icon ai-icon-gpt"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="#000"><path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855l-5.843-3.369 2.02-1.168a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.402-.681zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08L8.704 5.46a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z"/></svg></div><div><div class="ai-item-title">Open in ChatGPT</div><div class="ai-item-sub">Ask questions about this page</div></div></a>
-        <a class="ai-item" id="aiClaude" href="#" target="_blank" rel="noopener"><div class="ai-icon ai-icon-claude"><img src="https://cdn.simpleicons.org/claude/D97757" width="15" height="15" alt="Claude"></div><div><div class="ai-item-title">Open in Claude</div><div class="ai-item-sub">Ask questions about this page</div></div></a>
-        <a class="ai-item" id="aiCopy" href="#" onclick="copyPageUrl(event)"><div class="ai-icon ai-icon-copy">⧉</div><div><div class="ai-item-title">Copy page</div><div class="ai-item-sub">Copy page as Markdown for LLMs</div></div></a>
-        <a class="ai-item" id="aiMarkdown" href="#" target="_blank" rel="noopener"><div class="ai-icon ai-icon-md">↓</div><div><div class="ai-item-title">View as Markdown</div><div class="ai-item-sub">View this page as plain text</div></div></a>
+        <a class="ai-item" id="aiGPT" href="#" target="_blank" rel="noopener">
+          <div class="ai-icon ai-icon-gpt"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="15" height="15" fill="#000"><path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855l-5.843-3.369 2.02-1.168a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.402-.681zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08L8.704 5.46a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z"/></svg></div>
+          <div><div class="ai-item-title">Open in ChatGPT</div><div class="ai-item-sub">Ask questions about this page</div></div>
+        </a>
+        <a class="ai-item" id="aiClaude" href="#" target="_blank" rel="noopener">
+          <div class="ai-icon ai-icon-claude"><img src="https://cdn.simpleicons.org/claude/D97757" width="15" height="15" alt="Claude"></div>
+          <div><div class="ai-item-title">Open in Claude</div><div class="ai-item-sub">Ask questions about this page</div></div>
+        </a>
+        <a class="ai-item" id="aiCopy" href="#" onclick="copyPageUrl(event)">
+          <div class="ai-icon ai-icon-copy">⧉</div>
+          <div><div class="ai-item-title">Copy page</div><div class="ai-item-sub">Copy page as Markdown for LLMs</div></div>
+        </a>
+        <a class="ai-item" id="aiMarkdown" href="#" target="_blank" rel="noopener">
+          <div class="ai-icon ai-icon-md">↓</div>
+          <div><div class="ai-item-title">View as Markdown</div><div class="ai-item-sub">View this page as plain text</div></div>
+        </a>
       </div>
     </div>
   </div>
 </nav>
-<div class="center">
-  <div class="tag">Coming Soon</div>
-  <h1>Q2 2026 Report</h1>
-  <p>Covering April 1 – June 30, 2026. Supply trajectory post-ATH, USDG consolidation, protocol expansion, and chain rank dynamics.</p>
-  <div class="date">Publishes July 2026</div>
-  <a href="/q1-2026" class="btn">Read Q1 2026 →</a>
-</div>
+
+
+<div class="report-wrap">
+
+  <!-- Big Idea -->
+  <div class="big-idea">
+    <div class="bi-eyebrow">TL;DR · Apr 1 – Jun 30, 2026</div>
+    <div class="bi-headline">Q2 was a stress test: SOL fell another 10% and DeFi TVL dropped 20% - yet Solana's stablecoin base still grew, and the mix behind it changed faster than ever.</div>
+    <ul style="margin-top:14px;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:9px;">
+      <li style="font-size:13px;opacity:0.9;line-height:1.6;display:flex;gap:10px;"><span style="opacity:0.55;flex-shrink:0;font-weight:700;font-size:11px;margin-top:2px;">01</span><span><strong>Supply held up:</strong> Total stablecoin supply rose 2.4% from $14.26B to $14.60B, with an intra-quarter high of $15.41B on May 15 - while SOL ended the quarter 9.5% lower.</span></li>
+      <li style="font-size:13px;opacity:0.9;line-height:1.6;display:flex;gap:10px;"><span style="opacity:0.55;flex-shrink:0;font-weight:700;font-size:11px;margin-top:2px;">02</span><span><strong>USDC dominance cracked:</strong> USDC's share fell from 55.0% to 50.1% as $524M left the chain. USDG (incl. USDG0) grew 52% to $1.51B and is now the #3 Solana stablecoin; USDe arrived with $543M.</span></li>
+      <li style="font-size:13px;opacity:0.9;line-height:1.6;display:flex;gap:10px;"><span style="opacity:0.55;flex-shrink:0;font-weight:700;font-size:11px;margin-top:2px;">03</span><span><strong>Rank race:</strong> BSC ($14.66B) edged Solana ($14.60B) by just $60M at quarter-end. Daily SOL-price and supply moves were essentially uncorrelated (r = 0.02).</span></li>
+    </ul>
+  </div>
+
+  <!-- Insights -->
+  <div class="insights">
+    <div class="ins-card">
+      <div class="ins-n">01 - Supply</div>
+      <h4>+2.4% in a down quarter</h4>
+      <p>Supply touched $15.41B in mid-May, gave back gains in late May, then recovered through June to close at $14.60B - holding up while the rest of Solana DeFi shrank.</p>
+    </div>
+    <div class="ins-card">
+      <div class="ins-n">02 - Composition</div>
+      <h4>USDC slips to a coin-flip majority</h4>
+      <p>USDC fell to 50.1% of supply. Non-USDC/USDT stablecoins grew from $3.52B to $4.78B in one quarter, led by USDG/USDG0, USDe and USD1.</p>
+    </div>
+    <div class="ins-card">
+      <div class="ins-n">03 - Resilience</div>
+      <h4>Stablecoins ignored SOL again</h4>
+      <p>SOL swung between $97 and $62 and TVL fell 20%, but supply finished higher. The correlation of daily changes was 0.02 - effectively zero.</p>
+    </div>
+  </div>
+
+  <!-- KPIs -->
+  <div class="kpi-grid">
+    <div class="kpi"><div class="label">Q2 End Supply</div><div class="value ink">$14.60B</div><div class="sub">Jun 30, 2026</div></div>
+    <div class="kpi"><div class="label">QoQ Change</div><div class="value up">+2.4%</div><div class="sub">$14.26B → $14.60B</div></div>
+    <div class="kpi"><div class="label">Q2 High</div><div class="value teal">$15.41B</div><div class="sub">May 15, 2026</div></div>
+    <div class="kpi"><div class="label">Global Rank</div><div class="value slate">#4</div><div class="sub">BSC ahead by $60M</div></div>
+    <div class="kpi"><div class="label">USDC Share</div><div class="value teal">50.1%</div><div class="sub">from 55.0% in Q1</div></div>
+    <div class="kpi"><div class="label">USDG + USDG0</div><div class="value amber">$1.51B</div><div class="sub">+52% QoQ · now #3</div></div>
+    <div class="kpi"><div class="label">SOL Price Range</div><div class="value down">$62–$97</div><div class="sub">High May 11 · low Jun 6</div></div>
+    <div class="kpi"><div class="label">SOL QoQ</div><div class="value down">−9.5%</div><div class="sub">$81.2 → $73.5</div></div>
+    <div class="kpi"><div class="label">Solana DeFi TVL</div><div class="value ink">$4.88B</div><div class="sub">−20% QoQ · avg $5.28B</div></div>
+    <div class="kpi"><div class="label">Share of Global Supply</div><div class="value slate">4.8%</div><div class="sub">of $303.4B (Jun 30)</div></div>
+    <div class="kpi"><div class="label">USDC Wallets (Solana)</div><div class="value ink">7.62M</div><div class="sub">Jun 30 · Solana Compass</div></div>
+    <div class="kpi"><div class="label">SOL vs Supply Corr.</div><div class="value teal">0.02</div><div class="sub">Daily % changes, Q2</div></div>
+  </div>
+
+  <!-- 1. Global context -->
+  <div class="grid-full">
+    <div class="card">
+      <div class="card-hd"><div class="card-hd-text"><div class="c-eyebrow">Global Context</div><div class="c-title">Stablecoin Supply by Chain - Where Does Solana Rank?</div><div class="c-sub">As of Jun 30, 2026</div></div><div class="info-wrap"><div class="info-btn">i</div><div class="info-tooltip">Total stablecoin supply per chain at Q2 end (DefiLlama). Solana and BSC finished within $60M of each other.</div></div></div>
+      <div class="chart-box h220"><canvas id="qChains"></canvas></div><div class="chart-src">Source: DefiLlama</div>
+      <div class="callout">
+        <div class="c-label">Key takeaway</div>
+        Ethereum still dominates but shed $6.1B in Q2 ($158.9B → $152.9B), while Tron added $3.6B. Solana and BSC are now locked in a dead heat for #3 - BSC finished $60M ahead on DefiLlama's count. Hyperliquid L1 ($5.9B) is the fastest-rising challenger behind them.
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Supply + composition -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-hd"><div class="card-hd-text"><div class="c-eyebrow">Insight 01 - Supply</div><div class="c-title">Stablecoin Supply on Solana</div><div class="c-sub">Daily · Mar 31 – Jun 30, 2026</div></div><div class="info-wrap"><div class="info-btn">i</div><div class="info-tooltip">Daily total stablecoin supply on Solana (all peg types) across Q2 2026.</div></div></div>
+      <div class="chart-box h260"><canvas id="qSupply"></canvas></div><div class="chart-src">Source: DefiLlama</div>
+      <div class="callout">
+        <div class="c-label">Key takeaway</div>
+        Supply climbed above $15.2B by mid-April, swung between $13.8B (May 10) and a $15.41B high (May 15) in a volatile May, then settled around $14.6B through June. The Solana Foundation, using a broader count, reported a $16.4B peak in May.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-hd"><div class="card-hd-text"><div class="c-eyebrow">Insight 02 - Composition</div><div class="c-title">Supply by Stablecoin (Jun 30, 2026)</div><div class="c-sub">% of Solana total</div></div><div class="info-wrap"><div class="info-btn">i</div><div class="info-tooltip">Share of each stablecoin in Solana's total supply at Q2 end. USDG includes the USDG0 (LayerZero) representation.</div></div></div>
+      <div class="chart-box h220"><canvas id="qComp"></canvas></div><div class="chart-src">Source: DefiLlama</div>
+      <div class="callout">
+        <div class="c-label">Key takeaway</div>
+        USDC is down to 50.1% from 55.0% in Q1. USDG + USDG0 (10.4%) overtook USD1 (7.0%) and PYUSD (4.7%), and Ethena's USDe went from almost nothing to 3.7% in a single quarter.
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. SOL vs supply + TVL -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-hd"><div class="card-hd-text"><div class="c-eyebrow">Insight 03 - Resilience</div><div class="c-title">SOL/USD vs Stablecoin Supply - Q2 2026</div><div class="c-sub">Daily · SOL (left axis) vs supply (right axis)</div></div><div class="info-wrap"><div class="info-btn">i</div><div class="info-tooltip">SOL fell from ~$81 to ~$74 with a $97 high and $62 low; supply (dashed) finished the quarter higher.</div></div></div>
+      <div class="chart-box h220"><canvas id="qSol"></canvas></div><div class="chart-src">Source: DefiLlama</div>
+      <div class="callout">
+        <div class="c-label">Key takeaway</div>
+        SOL rallied to $97 in mid-May, then fell 36% to $62 by June 6. Stablecoin supply barely reacted - the correlation between daily SOL and supply changes was 0.02, extending the Q1 decoupling.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-hd"><div class="card-hd-text"><div class="c-eyebrow">Context - DeFi</div><div class="c-title">Solana DeFi TVL - Q2 2026</div><div class="c-sub">Daily · All protocols</div></div><div class="info-wrap"><div class="info-btn">i</div><div class="info-tooltip">Total value locked across Solana DeFi through Q2 - largely SOL-denominated, so it moves with SOL price.</div></div></div>
+      <div class="chart-box h220"><canvas id="qTvl"></canvas></div><div class="chart-src">Source: DefiLlama</div>
+      <div class="callout">
+        <div class="c-label">Key takeaway</div>
+        TVL fell 20% ($6.10B → $4.88B), with a $4.38B low in mid-June. Galaxy Research also reported DEX volume down 45% and network fees down 44% QoQ - making the stablecoin base the steadiest part of the economy.
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Who gained / who lost -->
+  <div class="grid-full">
+    <div class="card">
+      <div class="card-hd"><div class="card-hd-text"><div class="c-eyebrow">Insight 04 - Rotation</div><div class="c-title">Who Gained, Who Lost - QoQ Supply Change by Stablecoin</div><div class="c-sub">Mar 31 → Jun 30, 2026 · USD millions</div></div><div class="info-wrap"><div class="info-btn">i</div><div class="info-tooltip">Change in each stablecoin's Solana supply over Q2. Green = net inflow, red = net outflow.</div></div></div>
+      <div class="chart-box h220"><canvas id="qShift"></canvas></div><div class="chart-src">Source: DefiLlama</div>
+      <div class="callout">
+        <div class="c-label">Key takeaway</div>
+        The headline +$341M hides a big rotation: USDC (−$524M) and USDT (−$385M) shrank, while USDe (+$540M), USDG/USDG0 (+$519M), USX (+$154M) and USD1 (+$137M) grew. Solana's dollar base is diversifying away from the two incumbents.
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Peg health + activity -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-hd"><div class="card-hd-text"><div class="c-eyebrow">Peg Health</div><div class="c-title">Max Daily Peg Deviation - Major Solana Stablecoins</div><div class="c-sub">Q2 2026 · DefiLlama daily prices</div></div><div class="info-wrap"><div class="info-btn">i</div><div class="info-tooltip">Largest single-day deviation from $1.00 for each major stablecoin over the quarter. Flag threshold: ±0.5%.</div></div></div>
+      <table class="peg-table"><thead><tr><th>Asset</th><th>Max daily deviation</th><th>Date</th><th>Status</th></tr></thead><tbody>
+<tr><td>USDC</td><td>0.04%</td><td>May 28</td><td><span class=pill-ok>Healthy</span></td></tr>
+<tr><td>USDT</td><td>0.19%</td><td>Jun 18</td><td><span class=pill-ok>Healthy</span></td></tr>
+<tr><td>USDG</td><td>0.05%</td><td>May 16</td><td><span class=pill-ok>Healthy</span></td></tr>
+<tr><td>USD1</td><td>0.20%</td><td>May 28</td><td><span class=pill-ok>Healthy</span></td></tr>
+<tr><td>PYUSD</td><td>0.06%</td><td>May 17</td><td><span class=pill-ok>Healthy</span></td></tr>
+<tr><td>USDe</td><td>0.20%</td><td>Jun 30</td><td><span class=pill-ok>Healthy</span></td></tr>
+</tbody></table>
+      <div class="callout">
+        <div class="c-label">Key takeaway</div>
+        Every major Solana stablecoin stayed within 0.2% of $1.00 on a daily basis through Q2. No asset among the top six came close to the 0.5% flag, even during the June SOL sell-off.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-hd"><div class="card-hd-text"><div class="c-eyebrow">Activity</div><div class="c-title">Usage Signals - Q2 2026</div><div class="c-sub">Payments, wallets and trading</div></div><div class="info-wrap"><div class="info-btn">i</div><div class="info-tooltip">Usage metrics for Solana stablecoins and the wider network during Q2 2026 from Solana Compass, CoinShares/Citywire, the Solana Foundation and Galaxy Research.</div></div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0;">
+        <div class="kpi"><div class="label">USDC Transfer Vol (30d)</div><div class="value teal">$313B</div><div class="sub">To early May · ~40× supply</div></div>
+        <div class="kpi"><div class="label">USDC Wallets</div><div class="value up">+456K</div><div class="sub">Jun 6 → Jun 30 (7.17M → 7.62M)</div></div>
+        <div class="kpi"><div class="label">Perps Volume (May)</div><div class="value slate">$64.6B</div><div class="sub">Monthly record · Solana Fdn</div></div>
+        <div class="kpi"><div class="label">Spot SOL ETF AUM</div><div class="value ink">~$1.13B</div><div class="sub">End of May · $115M May inflows</div></div>
+      </div>
+      <div class="callout">
+        <div class="c-label">Key takeaway</div>
+        USDC turning over ~40× its supply in a month marks it as a payments asset, not idle collateral. Wallet growth kept accelerating even as DEX activity and fees cooled.
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Catalysts -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-hd"><div class="card-hd-text"><div class="c-eyebrow">Institutional Adoption</div><div class="c-title">Payment Rails & New Issuers</div><div class="c-sub">Q2 2026 highlights</div></div><div class="info-wrap"><div class="info-btn">i</div><div class="info-tooltip">Institutional developments from Q2 2026 reported by TokenPost, Solana Compass and Whale Alert.</div></div></div>
+      <div style="margin:16px 0;display:flex;flex-direction:column;gap:10px;">
+        <div style="background:var(--teal-light);border-radius:10px;padding:14px 16px;">
+          <div style="font-size:11px;font-weight:700;color:var(--teal);margin-bottom:4px;">MASTERCARD · JUN 3</div>
+          <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px;">Solana picked for a 24/7 stablecoin payments network</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Mastercard named eight blockchains, including Solana, for a global stablecoin settlement network designed to run around the clock.</div>
+        </div>
+        <div style="background:var(--slate-light);border-radius:10px;padding:14px 16px;">
+          <div style="font-size:11px;font-weight:700;color:var(--slate);margin-bottom:4px;">CIRCLE · JUN 8</div>
+          <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px;">$500M USDC minted - Solana passes 10% of global USDC</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Two tranches totalling $500M pushed Solana above 10% of global USDC supply, a share that held through the rest of June.</div>
+        </div>
+        <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;">
+          <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:4px;">SOFI BANK · APR–JUN</div>
+          <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px;">Bank-issued SoFiUSD launches on Solana</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">SoFiUSD went live on Solana in early April and passed $200M on-chain by June 30 (Artemis), with essentially all of its growth on Solana.</div>
+        </div>
+      </div>
+      <div class="callout">
+        <div class="c-label">Key takeaway</div>
+        Q2's pattern: card networks and banks choosing Solana as a settlement rail. That is new issuance and payments demand, which helps explain why supply grew while trading activity shrank.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-hd"><div class="card-hd-text"><div class="c-eyebrow">Regulatory & Market</div><div class="c-title">GENIUS Act, MiCA and a Softer Global Market</div><div class="c-sub">Key developments Q2 2026</div></div><div class="info-wrap"><div class="info-btn">i</div><div class="info-tooltip">Global supply from DefiLlama; regulatory context from Stablecoin Insider and Crystal Intelligence reporting on Q2 2026.</div></div></div>
+      <div style="margin:16px 0;display:flex;flex-direction:column;gap:10px;">
+        <div style="background:var(--teal-light);border-radius:10px;padding:14px 16px;">
+          <div style="font-size:11px;font-weight:700;color:var(--teal);margin-bottom:4px;">GLOBAL MARKET</div>
+          <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px;">Global supply peaked at $314B, then fell to $303B</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Global stablecoin supply hit $314.4B on May 17 before an ~$11B pullback by June 30. Solana's share of global supply still edged up from 4.6% to 4.8%.</div>
+        </div>
+        <div style="background:var(--slate-light);border-radius:10px;padding:14px 16px;">
+          <div style="font-size:11px;font-weight:700;color:var(--slate);margin-bottom:4px;">MiCA (EU) · JUL 1 DEADLINE</div>
+          <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px;">USDT squeezed out of regulated EU venues</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">The run-up to MiCA's July 1 enforcement deadline pushed EU platforms to delist USDT, favouring compliant issuers such as USDC, USDG and EURC.</div>
+        </div>
+      </div>
+      <div class="callout">
+        <div class="c-label">Key takeaway</div>
+        Regulation is rewarding compliant, reserve-backed issuers. On Solana that shows up as USDG and USD1 taking share while USDT shrank 13% in the quarter.
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px 28px;margin-bottom:24px;">
+    <div style="font-size:10px;font-weight:800;letter-spacing:1.2px;color:var(--faint);text-transform:uppercase;margin-bottom:16px;">Sources &amp; Methodology</div>
+    <table style="width:100%;border-collapse:collapse;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--border);">
+          <th style="text-align:left;font-size:10px;font-weight:700;color:var(--faint);text-transform:uppercase;letter-spacing:0.5px;padding:0 12px 10px 0;width:160px;">Data Point</th>
+          <th style="text-align:left;font-size:10px;font-weight:700;color:var(--faint);text-transform:uppercase;letter-spacing:0.5px;padding:0 12px 10px;width:160px;">Source</th>
+          <th style="text-align:left;font-size:10px;font-weight:700;color:var(--faint);text-transform:uppercase;letter-spacing:0.5px;padding:0 0 10px;">Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--surface2);">
+          <td style="padding:12px 12px 12px 0;font-size:12px;font-weight:600;color:var(--ink);vertical-align:top;">Supply, Composition, Chains</td>
+          <td style="padding:12px;font-size:12px;color:var(--teal);font-weight:500;vertical-align:top;">DefiLlama</td>
+          <td style="padding:12px 0 12px 0;font-size:12px;color:var(--muted);line-height:1.6;vertical-align:top;">Daily Solana stablecoin supply (all peg types), per-asset Solana balances and per-chain totals for Mar 31 – Jun 30, 2026. Pulled Nov 16, 2026 from stablecoins.llama.fi; DefiLlama revises history, so figures can differ from earlier snapshots (including the Q1 report).</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--surface2);">
+          <td style="padding:12px 12px 12px 0;font-size:12px;font-weight:600;color:var(--ink);vertical-align:top;">SOL Price & DeFi TVL</td>
+          <td style="padding:12px;font-size:12px;color:var(--teal);font-weight:500;vertical-align:top;">DefiLlama</td>
+          <td style="padding:12px 0 12px 0;font-size:12px;color:var(--muted);line-height:1.6;vertical-align:top;">Daily SOL/USD from coins.llama.fi (20 missing days interpolated) and Solana chain TVL from api.llama.fi.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--surface2);">
+          <td style="padding:12px 12px 12px 0;font-size:12px;font-weight:600;color:var(--ink);vertical-align:top;">Correlation</td>
+          <td style="padding:12px;font-size:12px;color:var(--teal);font-weight:500;vertical-align:top;">Own calculation</td>
+          <td style="padding:12px 0 12px 0;font-size:12px;color:var(--muted);line-height:1.6;vertical-align:top;">Pearson correlation of daily % change in SOL price vs daily % change in total stablecoin supply, Q2 2026 (n = 71 overlapping days).</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--surface2);">
+          <td style="padding:12px 12px 12px 0;font-size:12px;font-weight:600;color:var(--ink);vertical-align:top;">Peg Health</td>
+          <td style="padding:12px;font-size:12px;color:var(--teal);font-weight:500;vertical-align:top;">DefiLlama</td>
+          <td style="padding:12px 0 12px 0;font-size:12px;color:var(--muted);line-height:1.6;vertical-align:top;">Max absolute daily deviation from $1.00 per asset, using DefiLlama daily stablecoin prices. Thinly traded assets with obvious one-off price-feed outliers (e.g. CASH, USX) are excluded.</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--surface2);">
+          <td style="padding:12px 12px 12px 0;font-size:12px;font-weight:600;color:var(--ink);vertical-align:top;">Usage Signals</td>
+          <td style="padding:12px;font-size:12px;color:var(--teal);font-weight:500;vertical-align:top;">Solana Compass · CoinShares · Solana Foundation</td>
+          <td style="padding:12px 0 12px 0;font-size:12px;color:var(--muted);line-height:1.6;vertical-align:top;">USDC wallet counts (Solana Compass), USDC 30-day transfer volume (CoinShares via Citywire), May perps volume and ETF figures (Solana Foundation May 2026 roundup).</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--surface2);">
+          <td style="padding:12px 12px 12px 0;font-size:12px;font-weight:600;color:var(--ink);vertical-align:top;">Network Context</td>
+          <td style="padding:12px;font-size:12px;color:var(--teal);font-weight:500;vertical-align:top;">Galaxy Research</td>
+          <td style="padding:12px 0 12px 0;font-size:12px;color:var(--muted);line-height:1.6;vertical-align:top;">Q2 2026 Solana report: DEX volume −45% QoQ, fees −44%; Galaxy measures supply differently ($15.6B, USDC 47%).</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--surface2);">
+          <td style="padding:12px 12px 12px 0;font-size:12px;font-weight:600;color:var(--ink);vertical-align:top;">Institutional</td>
+          <td style="padding:12px;font-size:12px;color:var(--teal);font-weight:500;vertical-align:top;">TokenPost · Solana Compass · Artemis</td>
+          <td style="padding:12px 0 12px 0;font-size:12px;color:var(--muted);line-height:1.6;vertical-align:top;">Mastercard network (Jun 3), Circle $500M mint (Jun 8, Whale Alert), SoFiUSD supply (Artemis, Jun 30).</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--surface2);">
+          <td style="padding:12px 12px 12px 0;font-size:12px;font-weight:600;color:var(--ink);vertical-align:top;">Regulatory</td>
+          <td style="padding:12px;font-size:12px;color:var(--teal);font-weight:500;vertical-align:top;">Stablecoin Insider · Crystal Intelligence</td>
+          <td style="padding:12px 0 12px 0;font-size:12px;color:var(--muted);line-height:1.6;vertical-align:top;">MiCA enforcement and USDT delistings, GENIUS Act implementation, Q2 issuer growth.</td>
+        </tr>
+        <tr>
+          <td style="padding:12px 12px 12px 0;font-size:12px;font-weight:600;color:var(--ink);vertical-align:top;">Accuracy note</td>
+          <td style="padding:12px;font-size:12px;color:var(--teal);font-weight:500;vertical-align:top;">-</td>
+          <td style="padding:12px 0 12px 0;font-size:12px;color:var(--muted);line-height:1.6;vertical-align:top;">All figures in USD. Differences vs other trackers (Solana Foundation, Artemis, Galaxy) come from which assets and bridged tokens are counted. This is not financial advice.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="rep-nav">
+    <a href="/q1-2026"><span>← Previous</span>Q1 2026 Report</a>
+    <a href="/q3-2026" class="next"><span>Next →</span>Q3 2026 Report</a>
+  </div>
+
+</div><!-- /report-wrap -->
+
 <footer>
   <p>Solana Stablecoin Analytics &nbsp;·&nbsp; Independent research &nbsp;·&nbsp; Data: <a href="https://defillama.com" target="_blank" rel="noopener">DefiLlama</a> &nbsp;·&nbsp; Not financial advice</p>
   <p style="margin-top:6px;">Built by <a href="https://x.com/0xAditya_k" target="_blank" rel="noopener">Aditya Khetarpal</a></p>
 </footer>
+
+<script>
+  const C={FOREST:'#3B7A57',CRIMSON:'#A63228',AMBER:'#B5780C',SLATE:'#3B5A8A'};
+  const STBL={USDC:'#1D5FA8',USDT:'#4E9D6B',USDG:'#7B5EA7',USD1:'#C06B2E',PYUSD:'#B34A7A',USDe:'#1A8C9E',USX:'#5C7A3E',SoFiUSD:'#8A6D3B',Others:'#B0AAA0'};
+  const CHAIN_C={Ethereum:'#627EEA',Tron:'#CC2200',Solana:'#0A7C6B',BSC:'#B8860B','Hyperliquid L1':'#4A3F8A',Base:'#3D7ABF',Arbitrum:'#1A6FA8'};
+
+  function rgb(h){return `${parseInt(h.slice(1,3),16)},${parseInt(h.slice(3,5),16)},${parseInt(h.slice(5,7),16)}`;}
+  function grad(ctx,hex,a1=0.14,a2=0.01){const g=ctx.createLinearGradient(0,0,0,300);g.addColorStop(0,`rgba(${rgb(hex)},${a1})`);g.addColorStop(1,`rgba(${rgb(hex)},${a2})`);return g;}
+  function getTIP(){const dk=document.documentElement.getAttribute('data-theme')==='dark';return{backgroundColor:dk?'#1C1B19':'#FDFCF9',borderColor:dk?'#302E2A':'#DDD9CE',borderWidth:1,titleColor:dk?'#EDE9E0':'#18171A',bodyColor:dk?'#9A9488':'#706C62',padding:10,cornerRadius:8,boxPadding:4};}
+  function getGX(){const dk=document.documentElement.getAttribute('data-theme')==='dark';return{color:dk?'rgba(255,255,255,0.05)':'rgba(0,0,0,0.04)'};}
+  function getTC(){return document.documentElement.getAttribute('data-theme')==='dark'?'#EDE9E0':'#18171A';}
+
+  // Daily series · DefiLlama (pulled Nov 16, 2026). SOL gaps (no DefiLlama print) are linearly interpolated.
+  const D0='2026-03-31';
+  const SUP=[14.26, 14.23, 14.18, 14.2, 14.08, 14.05, 14.08, 14.25, 14.27, 14.49, 14.63, 14.69, 14.69, 14.78, 14.56, 15.04, 15.11, 15.17, 15.26, 15.24, 15.16, 15.27, 15.18, 15.24, 15.27, 15.19, 15.08, 15.1, 15.26, 15.01, 14.86, 14.9, 14.91, 14.6, 14.65, 15, 14.66, 14.37, 14.14, 14.23, 13.79, 13.91, 14.82, 15.22, 14.86, 15.41, 14.66, 14.52, 14.5, 14.26, 14.13, 14.13, 14.25, 14.21, 14.05, 14.1, 14.2, 14.3, 14.29, 13.98, 14.18, 14.16, 14.16, 14.36, 14.94, 14.65, 14.31, 14.47, 14.61, 14.91, 14.96, 14.7, 14.78, 14.84, 14.64, 14.69, 14.73, 14.56, 14.39, 14.39, 14.69, 14.76, 14.82, 14.77, 14.82, 14.83, 14.41, 14.45, 14.57, 14.57, 14.56, 14.6];
+  const SOL=[81.2, 81.2, 80.1, 78.9, 80.4, 80.8, 81.9, 80.1, 85.7, 82.6, 84.8, 84.9, 84.9, 86.6, 83.8, 86.4, 89, 88.9, 86.2, 83.6, 84.4, 85.3, 86, 86.9, 86.2, 86.2, 87, 85.9, 84.8, 83, 83, 83, 83.7, 84.3, 83.9, 86.3, 87.7, 89.1, 88.4, 93.2, 95.2, 97.3, 94.3, 93.2, 92.1, 89.3, 86.5, 85.2, 85.2, 85.3, 84.2, 87.2, 85.7, 84.3, 85.7, 85.2, 83.6, 83, 82.4, 82, 82.6, 82.4, 82.3, 81.1, 74.1, 68.8, 63.5, 62.2, 64.3, 66.3, 66.8, 65, 63.2, 66.8, 69, 71.2, 72.6, 74, 73.4, 72, 69.7, 69.6, 73.2, 71.9, 69.6, 68, 67.6, 69.7, 71.8, 70.4, 71.3, 73.5];
+  const TVL=[6.1, 6.28, 5.32, 5.33, 5.3, 5.46, 5.47, 5.33, 5.63, 5.64, 5.67, 5.73, 5.75, 5.51, 5.85, 5.73, 5.83, 5.86, 5.97, 5.75, 5.51, 5.48, 5.54, 5.54, 5.5, 5.46, 5.49, 5.52, 5.45, 5.4, 5.36, 5.37, 5.37, 5.39, 5.44, 5.4, 5.47, 5.55, 5.53, 5.68, 5.73, 5.81, 5.69, 5.58, 5.46, 5.51, 5.49, 5.38, 5.33, 5.32, 5.34, 5.39, 5.48, 5.38, 5.43, 5.39, 5.39, 5.33, 5.24, 5.17, 5.29, 5.34, 5.33, 5.23, 4.96, 4.93, 4.87, 4.65, 4.64, 4.87, 4.82, 4.72, 4.38, 4.53, 4.64, 4.71, 4.83, 4.86, 4.87, 4.75, 4.72, 4.72, 4.85, 4.85, 4.79, 4.73, 4.65, 4.6, 4.77, 4.7, 4.76, 4.88];
+  const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const DATES=SUP.map((_,i)=>{const d=new Date(D0+'T00:00:00Z');d.setUTCDate(d.getUTCDate()+i);return MON[d.getUTCMonth()]+' '+d.getUTCDate();});
+  const COMP_L=["USDC", "USDT", "USDG", "USD1", "PYUSD", "USDe", "USX", "Others"];
+  const COMP_D=[50.1, 17.2, 10.4, 7.0, 4.7, 3.7, 3.5, 3.4];
+  const CHAIN_L=["Ethereum", "Tron", "BSC", "Solana", "Hyperliquid L1", "Base", "Arbitrum"];
+  const CHAIN_D=[152.85, 89.76, 14.66, 14.6, 5.92, 4.91, 4.25];
+  const SHIFT_L=["USDe", "USDG", "USX", "USD1", "PYUSD", "USDT", "USDC"];
+  const SHIFT_D=[540, 519, 154, 137, -21, -385, -524];
+
+  const qCharts={};
+  function makeOrUpdate(id,config){if(qCharts[id])qCharts[id].destroy();qCharts[id]=new Chart(document.getElementById(id),config);}
+  const lineX=()=>({grid:getGX(),ticks:{font:{size:10},maxTicksLimit:7,maxRotation:0}});
+
+  function initCharts(){
+    const dk=(localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'))==='dark';
+    document.documentElement.setAttribute('data-theme',dk?'dark':'light');
+    Chart.defaults.color=dk?'#9A9488':'#706C62';
+    Chart.defaults.borderColor=dk?'#302E2A':'#DDD9CE';
+    Chart.defaults.font.family='Inter, -apple-system, sans-serif';
+
+    makeOrUpdate('qChains',{type:'bar',data:{labels:CHAIN_L,datasets:[{data:CHAIN_D,backgroundColor:CHAIN_L.map(c=>`rgba(${rgb(CHAIN_C[c]||'#8A7F72')},0.82)`),borderColor:CHAIN_L.map(c=>CHAIN_C[c]||'#8A7F72'),borderWidth:1,borderRadius:5,borderSkipped:false}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...getTIP(),callbacks:{label:i=>` $${i.raw}B`}}},scales:{x:{grid:getGX(),ticks:{callback:v=>`$${v}B`,font:{size:10}}},y:{grid:{display:false},ticks:{color:getTC(),font:{size:11,weight:'600'}}}}}});
+
+    makeOrUpdate('qSupply',{type:'line',data:{labels:DATES,datasets:[{data:SUP,borderColor:C.FOREST,borderWidth:2.2,pointRadius:0,pointHoverRadius:5,fill:true,backgroundColor:ctx=>grad(ctx.chart.ctx,C.FOREST,0.15,0.01),tension:0.3}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{...getTIP(),callbacks:{label:i=>` $${i.raw}B`}}},scales:{x:lineX(),y:{grid:getGX(),ticks:{callback:v=>`$${v}B`,font:{size:10}},min:13.5,max:15.8}}}});
+
+    makeOrUpdate('qComp',{type:'bar',data:{labels:COMP_L,datasets:[{data:COMP_D,backgroundColor:COMP_L.map(s=>STBL[s]||STBL.Others),borderRadius:5,borderSkipped:false}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...getTIP(),callbacks:{label:i=>` ${i.raw}%`}}},scales:{x:{grid:getGX(),ticks:{callback:v=>`${v}%`,font:{size:10}},max:60},y:{grid:{display:false},ticks:{color:getTC(),font:{size:11,weight:'600'}}}}}});
+
+    makeOrUpdate('qSol',{type:'line',data:{labels:DATES,datasets:[{label:'SOL/USD',data:SOL,borderColor:C.CRIMSON,borderWidth:2,pointRadius:0,fill:true,backgroundColor:ctx=>grad(ctx.chart.ctx,C.CRIMSON,0.12,0.01),tension:0.3,yAxisID:'y'},{label:'Stablecoin supply',data:SUP,borderColor:C.FOREST,borderWidth:1.6,borderDash:[4,3],pointRadius:0,fill:false,tension:0.3,yAxisID:'y1'}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:true,position:'bottom',labels:{boxWidth:10,font:{size:10}}},tooltip:{...getTIP(),callbacks:{label:i=>i.datasetIndex===0?` SOL $${i.raw}`:` Supply $${i.raw}B`}}},scales:{x:lineX(),y:{grid:getGX(),ticks:{callback:v=>`$${v}`,font:{size:10}},min:55,max:105},y1:{position:'right',grid:{display:false},ticks:{callback:v=>`$${v}B`,font:{size:10}},min:13.5,max:15.8}}}});
+
+    makeOrUpdate('qTvl',{type:'line',data:{labels:DATES,datasets:[{data:TVL,borderColor:C.AMBER,borderWidth:2,pointRadius:0,fill:true,backgroundColor:ctx=>grad(ctx.chart.ctx,C.AMBER,0.14,0.01),tension:0.3}]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{...getTIP(),callbacks:{label:i=>` $${i.raw}B TVL`}}},scales:{x:lineX(),y:{grid:getGX(),ticks:{callback:v=>`$${v}B`,font:{size:10}},min:4,max:6.6}}}});
+
+    makeOrUpdate('qShift',{type:'bar',data:{labels:SHIFT_L,datasets:[{data:SHIFT_D,backgroundColor:SHIFT_D.map(v=>v>=0?'rgba(26,127,75,0.78)':'rgba(192,57,43,0.78)'),borderColor:SHIFT_D.map(v=>v>=0?'#1A7F4B':'#C0392B'),borderWidth:1,borderRadius:5,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...getTIP(),callbacks:{label:i=>` ${i.raw>=0?'+':''}$${i.raw}M`}}},scales:{x:{grid:{display:false},ticks:{color:getTC(),font:{size:11,weight:'700'}}},y:{grid:getGX(),ticks:{callback:v=>`${v>0?'+':''}$${v}M`,font:{size:10}}}}}});
+  }
+
+  function onThemeChange(){initCharts();}
+  initCharts();
+</script>
 <script>
 (function(){const s=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',s);const el=document.getElementById('themeIcon');if(el)el.textContent=s==='dark'?'☀':'◑';})();
-function toggleTheme(){const d=document.documentElement.getAttribute('data-theme')==='dark';const n=d?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('theme',n);const el=document.getElementById('themeIcon');if(el)el.textContent=n==='dark'?'☀':'◑';}
+function toggleTheme(){const d=document.documentElement.getAttribute('data-theme')==='dark';const n=d?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('theme',n);const el=document.getElementById('themeIcon');if(el)el.textContent=n==='dark'?'☀':'◑';if(typeof onThemeChange==='function')onThemeChange();}
 function toggleAiMenu(){document.getElementById('aiMenu').classList.toggle('open');}
 document.addEventListener('click',function(e){const w=document.getElementById('aiWrap');if(w&&!w.contains(e.target)){const m=document.getElementById('aiMenu');if(m)m.classList.remove('open');}});
 (function(){const url=window.location.href;const q=encodeURIComponent('Analyze this Solana stablecoin page and answer my questions: '+url);const g=document.getElementById('aiGPT');const c=document.getElementById('aiClaude');const m=document.getElementById('aiMarkdown');if(g)g.href='https://chatgpt.com/?q='+q;if(c)c.href='https://claude.ai/new?q='+q;if(m)m.href='https://r.jina.ai/'+url;})();
 function copyPageUrl(e){e.preventDefault();const jinaUrl='https://r.jina.ai/'+window.location.href;navigator.clipboard.writeText(jinaUrl).then(()=>{const el=document.getElementById('aiCopy');if(el){const t=el.querySelector('.ai-item-title');const orig=t.textContent;t.textContent='Copied!';setTimeout(()=>{t.textContent=orig;},1500);}});document.getElementById('aiMenu').classList.remove('open');}
+</script>
+
+<!-- ── Q4 SUBSCRIBE MODAL ── -->
+<style>
+  /* Theme-aware overlay */
+  :root {
+    --sub-overlay: rgba(180,175,165,0.72);
+    --sub-shadow: 0 4px 40px rgba(0,0,0,0.13), 0 1px 4px rgba(0,0,0,0.08);
+  }
+  [data-theme="dark"] {
+    --sub-overlay: rgba(6,6,5,0.84);
+    --sub-shadow: 0 4px 48px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.6);
+  }
+
+  #subOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--sub-overlay);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 9000;
+    align-items: center;
+    justify-content: center;
+  }
+  #subOverlay.visible { display: flex; }
+
+  #subModal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px 36px 32px;
+    width: 100%;
+    max-width: 420px;
+    margin: 16px;
+    text-align: center;
+    position: relative;
+    box-shadow: var(--sub-shadow);
+    animation: subSlideUp 0.32s cubic-bezier(.22,.61,.36,1) both;
+  }
+  @keyframes subSlideUp {
+    from { opacity: 0; transform: translateY(20px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0)    scale(1);    }
+  }
+
+  /* teal top accent line */
+  #subModal::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 16px 16px 0 0;
+    background: var(--teal);
+  }
+
+  /* ── Animated document icon ── */
+  .sub-doc-wrap {
+    width: 64px; height: 64px;
+    margin: 0 auto 22px;
+    position: relative;
+  }
+  .sub-doc {
+    width: 46px; height: 56px;
+    background: var(--surface2);
+    border: 1.5px solid var(--border-dark);
+    border-radius: 4px 10px 10px 4px;
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    padding: 10px 8px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  /* folded corner */
+  .sub-doc::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 12px; height: 12px;
+    background: var(--border);
+    border-radius: 0 0 0 6px;
+    box-shadow: -1px 1px 0 var(--border-dark);
+  }
+  .sub-doc-line {
+    height: 4px;
+    background: var(--teal);
+    border-radius: 2px;
+    opacity: 0.7;
+    width: 0%;
+    animation: subTypeLine 0.5s ease forwards;
+  }
+  .sub-doc-line:nth-child(1) { animation-delay: 0.1s; --line-w: 85%; }
+  .sub-doc-line:nth-child(2) { animation-delay: 0.4s; --line-w: 65%; background: var(--faint); }
+  .sub-doc-line:nth-child(3) { animation-delay: 0.7s; --line-w: 80%; background: var(--faint); }
+  .sub-doc-line:nth-child(4) { animation-delay: 1.0s; --line-w: 50%; background: var(--faint); }
+  /* cursor on last line */
+  .sub-doc-cursor {
+    height: 4px; width: 5px;
+    background: var(--teal);
+    border-radius: 1px;
+    margin-top: 5px;
+    animation: subBlink 0.85s step-end infinite;
+    animation-delay: 1.5s;
+    opacity: 0;
+  }
+  @keyframes subTypeLine {
+    from { width: 0%; }
+    to   { width: var(--line-w); }
+  }
+  @keyframes subBlink {
+    0%,100% { opacity: 0; }
+    50%      { opacity: 1; }
+  }
+
+  .sub-label {
+    font-size: 10px; font-weight: 800; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--teal); margin-bottom: 10px;
+  }
+  .sub-title {
+    font-size: 20px; font-weight: 900; letter-spacing: -0.02em;
+    color: var(--ink); margin-bottom: 8px; line-height: 1.25;
+  }
+  .sub-desc {
+    font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 24px;
+  }
+  .sub-row { display: flex; gap: 8px; margin-bottom: 14px; }
+  .sub-input {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 13px;
+    font-size: 13px; color: var(--ink); outline: none;
+    transition: border-color 0.18s, box-shadow 0.18s;
+    font-family: inherit;
+  }
+  .sub-input::placeholder { color: var(--faint); }
+  .sub-input:focus {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px var(--teal-light);
+  }
+  .sub-btn {
+    background: var(--teal);
+    border: none; border-radius: 8px; padding: 10px 18px;
+    font-size: 13px; font-weight: 700; color: #fff;
+    cursor: pointer; white-space: nowrap;
+    transition: opacity 0.18s, transform 0.12s; font-family: inherit;
+  }
+  .sub-btn:hover  { opacity: 0.88; transform: scale(1.02); }
+  .sub-btn:active { transform: scale(0.97); }
+  .sub-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+  /* spinner inside button */
+  .sub-spinner {
+    display: none;
+    width: 16px; height: 16px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: subSpin 0.7s linear infinite;
+    margin: 0 auto;
+  }
+  @keyframes subSpin { to { transform: rotate(360deg); } }
+
+  /* full-screen success flash */
+  #subSuccessFlash {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--sub-overlay);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 9100;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+  }
+  #subSuccessFlash.visible { display: flex; animation: subFadeIn 0.2s ease both; }
+  @keyframes subFadeIn { from { opacity:0; } to { opacity:1; } }
+
+  .sub-tick-wrap {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: var(--up);
+    display: flex; align-items: center; justify-content: center;
+    animation: subPop 0.4s cubic-bezier(.34,1.56,.64,1) both;
+  }
+  @keyframes subPop {
+    from { transform: scale(0); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+  .sub-tick-wrap svg {
+    stroke-dasharray: 40;
+    stroke-dashoffset: 40;
+    animation: subDraw 0.4s ease 0.25s forwards;
+  }
+  @keyframes subDraw { to { stroke-dashoffset: 0; } }
+
+  .sub-flash-title {
+    font-size: 18px; font-weight: 800; color: var(--ink);
+    letter-spacing: -0.02em; text-align: center;
+    animation: subSlideUp 0.35s ease 0.3s both;
+  }
+  .sub-flash-sub {
+    font-size: 13px; color: var(--muted); text-align: center;
+    animation: subSlideUp 0.35s ease 0.4s both;
+  }
+
+  .sub-error { display: none; color: var(--down); font-size: 12px; margin-bottom: 10px; }
+  .sub-dismiss {
+    background: none; border: none; color: var(--faint); font-size: 12px;
+    cursor: pointer; display: inline-flex; align-items: center; gap: 4px;
+    padding: 4px 8px; border-radius: 6px;
+    transition: color 0.18s; font-family: inherit;
+  }
+  .sub-dismiss:hover { color: var(--muted); }
+  .sub-dismiss svg { transition: transform 0.18s; }
+  .sub-dismiss:hover svg { transform: translateX(3px); }
+</style>
+
+<div id="subOverlay" role="dialog" aria-modal="true" aria-label="Subscribe to Q4 2026 Report">
+  <div id="subModal">
+    <!-- Animated document icon -->
+    <div class="sub-doc-wrap">
+      <div class="sub-doc">
+        <div class="sub-doc-line"></div>
+        <div class="sub-doc-line"></div>
+        <div class="sub-doc-line"></div>
+        <div class="sub-doc-line"></div>
+        <div class="sub-doc-cursor"></div>
+      </div>
+    </div>
+
+    <div class="sub-label">Early Access</div>
+    <div class="sub-title">Q4 drops in January.<br>You can wait for the<br>timeline, or get it first.</div>
+    <div class="sub-desc">
+      Leave your email and we'll send it straight to you<br>the moment it publishes.
+    </div>
+    <div class="sub-error" id="subError"></div>
+    <div class="sub-row" id="subForm">
+      <input class="sub-input" id="subEmail" type="email" placeholder="your@email.com" autocomplete="email" maxlength="254" />
+      <button class="sub-btn" id="subSubmit" type="button">Get Q4 Report</button>
+    </div>
+    <button class="sub-dismiss" id="subDismiss" type="button">
+      No thanks
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+        <path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<!-- full-screen success flash -->
+<div id="subSuccessFlash">
+  <div class="sub-tick-wrap">
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <polyline points="7,18 15,26 29,11" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <div class="sub-flash-title">You're in.</div>
+  <div class="sub-flash-sub">Q4 lands in your inbox the moment it's live.</div>
+</div>
+
+<script>
+(function () {
+  // localStorage: only set when user subscribes — permanent, never show again
+  // sessionStorage: set when user dismisses — clears when tab/browser closes, shows again next visit
+  var SUBSCRIBED_KEY = 'sub_subscribed_v1';
+  var DISMISSED_KEY  = 'sub_dismissed_session';
+
+  var overlay      = document.getElementById('subOverlay');
+  var flashOverlay = document.getElementById('subSuccessFlash');
+  var emailInput   = document.getElementById('subEmail');
+  var submitBtn    = document.getElementById('subSubmit');
+  var dismissBtn   = document.getElementById('subDismiss');
+  var errorBox     = document.getElementById('subError');
+  var formRow      = document.getElementById('subForm');
+  var shown        = false;
+
+  function show() {
+    if (shown) return;
+    if (localStorage.getItem(SUBSCRIBED_KEY)) return;   // already subscribed — never show again
+    if (sessionStorage.getItem(DISMISSED_KEY)) return;  // dismissed this session — don't repeat
+    shown = true;
+    overlay.classList.add('visible');
+    setTimeout(function () { emailInput.focus(); }, 350);
+  }
+
+  function hide(dismiss) {
+    overlay.classList.remove('visible');
+    if (dismiss) sessionStorage.setItem(DISMISSED_KEY, '1'); // only blocks for this session
+  }
+
+  // Trigger at 50% scroll
+  window.addEventListener('scroll', function () {
+    var scrolled = window.scrollY + window.innerHeight;
+    var total    = document.documentElement.scrollHeight;
+    if (scrolled / total >= 0.50) show();
+  }, { passive: true });
+
+  // Fallback: show after 20s regardless of scroll
+  setTimeout(show, 20000);
+
+  dismissBtn.addEventListener('click', function () { hide(true); });
+  overlay.addEventListener('click', function (e) { if (e.target === overlay) hide(true); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') hide(true); });
+
+  submitBtn.addEventListener('click', function () { doSubmit(); });
+  emailInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') doSubmit(); });
+
+  function doSubmit() {
+    var email = emailInput.value.trim();
+    errorBox.style.display = 'none';
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errorBox.textContent = 'Please enter a valid email address.';
+      errorBox.style.display = 'block';
+      emailInput.focus();
+      return;
+    }
+    submitBtn.disabled  = true;
+    submitBtn.innerHTML = '<div class="sub-spinner" style="display:block"></div>';
+    fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, source: 'Q2 2026 Report' }),
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.ok) {
+          localStorage.setItem(SUBSCRIBED_KEY, '1'); // permanent — subscribed, never show again
+          sessionStorage.removeItem(DISMISSED_KEY);
+          overlay.classList.remove('visible');
+          flashOverlay.classList.add('visible');
+          setTimeout(function () { flashOverlay.classList.remove('visible'); }, 2800);
+        } else {
+          throw new Error(data.error || 'Something went wrong');
+        }
+      })
+      .catch(function (e) {
+        errorBox.textContent   = e.message || 'Could not subscribe. Try again.';
+        errorBox.style.display = 'block';
+        submitBtn.disabled     = false;
+        submitBtn.innerHTML    = 'Get Q4 Report';
+      });
+  }
+})();
 </script>
 </body>
 </html>

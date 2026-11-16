@@ -761,7 +761,7 @@ function copyPageUrl(e){e.preventDefault();const jinaUrl='https://r.jina.ai/'+wi
   .sub-dismiss:hover svg { transform: translateX(3px); }
 </style>
 
-<div id="subOverlay" role="dialog" aria-modal="true" aria-label="Subscribe to Q2 2026 Report">
+<div id="subOverlay" role="dialog" aria-modal="true" aria-label="Subscribe to Q4 2026 Report">
   <div id="subModal">
     <!-- Animated document icon -->
     <div class="sub-doc-wrap">
@@ -775,14 +775,14 @@ function copyPageUrl(e){e.preventDefault();const jinaUrl='https://r.jina.ai/'+wi
     </div>
 
     <div class="sub-label">Early Access</div>
-    <div class="sub-title">Q2 drops in July.<br>You can wait for the<br>timeline, or get it first.</div>
+    <div class="sub-title">Q4 drops in January.<br>You can wait for the<br>timeline, or get it first.</div>
     <div class="sub-desc">
       Leave your email and we'll send it straight to you<br>the moment it publishes.
     </div>
     <div class="sub-error" id="subError"></div>
     <div class="sub-row" id="subForm">
       <input class="sub-input" id="subEmail" type="email" placeholder="your@email.com" autocomplete="email" maxlength="254" />
-      <button class="sub-btn" id="subSubmit" type="button">Get Q2 Report</button>
+      <button class="sub-btn" id="subSubmit" type="button">Get Q4 Report</button>
     </div>
     <button class="sub-dismiss" id="subDismiss" type="button">
       No thanks
@@ -801,7 +801,7 @@ function copyPageUrl(e){e.preventDefault();const jinaUrl='https://r.jina.ai/'+wi
     </svg>
   </div>
   <div class="sub-flash-title">You're in.</div>
-  <div class="sub-flash-sub">Q2 lands in your inbox the moment it's live.</div>
+  <div class="sub-flash-sub">Q4 lands in your inbox the moment it's live.</div>
 </div>
 
 <script>
@@ -883,7 +883,7 @@ function copyPageUrl(e){e.preventDefault();const jinaUrl='https://r.jina.ai/'+wi
         errorBox.textContent   = e.message || 'Could not subscribe. Try again.';
         errorBox.style.display = 'block';
         submitBtn.disabled     = false;
-        submitBtn.innerHTML    = 'Get Q2 Report';
+        submitBtn.innerHTML    = 'Get Q4 Report';
       });
   }
 })();
